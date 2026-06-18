@@ -1,0 +1,114 @@
+[
+  {
+    "word": "maré",
+    "meaning": "tide",
+    "part_of_speech": "noun",
+    "source_type": "song",
+    "source_content": "song-a-mare-ta-cheia",
+    "date_learned": "2026-06-17",
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  },
+  {
+    "word": "cheia",
+    "meaning": "full/high",
+    "part_of_speech": "adjective",
+    "source_type": "song",
+    "source_content": "song-a-mare-ta-cheia",
+    "date_learned": "2026-06-17",
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  },
+  {
+    "word": "subiu",
+    "meaning": "rose/went up",
+    "part_of_speech": "verb (preterite)",
+    "source_type": "song",
+    "source_content": "song-a-mare-ta-cheia",
+    "date_learned": "2026-06-17",
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  },
+  {
+    "word": "desceu",
+    "meaning": "dropped/went down",
+    "part_of_speech": "verb (preterite)",
+    "source_type": "song",
+    "source_content": "song-a-mare-ta-cheia",
+    "date_learned": "2026-06-17",
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  },
+  {
+    "word": "peixe",
+    "meaning": "fish",
+    "part_of_speech": "noun",
+    "source_type": "song",
+    "source_content": "song-a-mare-ta-cheia",
+    "date_learned": "2026-06-17",
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  },
+  {
+    "word": "pulou",
+    "meaning": "jumped",
+    "part_of_speech": "verb (preterite)",
+    "source_type": "song",
+    "source_content": "song-a-mare-ta-cheia",
+    "date_learned": "2026-06-17",
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  },
+  {
+    "word": "ilha",
+    "meaning": "island",
+    "part_of_speech": "noun",
+    "source_type": "song",
+    "source_content": "song-a-mare-ta-cheia",
+    "date_learned": "2026-06-17",
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  }
+]

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Maré Tá Cheia - Capoeira Portuguese Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #009c3b 0%, #003da5 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #009c3b;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            color: #009c3b;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        .meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .meta-item {
+            text-align: center;
+        }
+        .meta-label {
+            color: #999;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+        .meta-value {
+            color: #009c3b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section h2 {
+            color: #009c3b;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-left: 4px solid #009c3b;
+            padding-left: 15px;
+        }
+        .section h3 {
+            color: #003da5;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th {
+            background: #009c3b;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover {
+            background: #f9f9f9;
+        }
+        .lyrics-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #003da5;
+            font-style: italic;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+        .pronunciation {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        .pronunciation-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .pronunciation-guide {
+            color: #666;
+            font-style: italic;
+        }
+        .cultural-note {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #009c3b;
+            margin: 20px 0;
+        }
+        .vocab-badge {
+            display: inline-block;
+            background: #009c3b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-right: 5px;
+        }
+        .practice-box {
+            background: #f0fff4;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+        .practice-box h4 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        .practice-box li {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .media-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .media-link {
+            display: inline-block;
+            background: #009c3b;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: background 0.3s;
+        }
+        .media-link:hover {
+            background: #003da5;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            justify-content: space-between;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            text-align: center;
+        }
+        .btn-back {
+            background: #6c757d;
+            color: white;
+            flex: 1;
+        }
+        .btn-back:hover {
+            background: #5a6268;
+        }
+        .btn-quiz {
+            background: #28a745;
+            color: white;
+            flex: 1;
+        }
+        .btn-quiz:hover {
+            background: #218838;
+        }
+        .difficulty {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .difficulty-2 {
+            background: #cfe2ff;
+            color: #084298;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>A Maré Tá Cheia</h1>
+            <p>The Tide is Full</p>
+        </div>
+
+        <div class="meta">
+            <div class="meta-item">
+                <div class="meta-label">Type</div>
+                <div class="meta-value">Corrido</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Difficulty</div>
+                <div class="meta-value"><span class="difficulty difficulty-2">2/5</span></div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Status</div>
+                <div class="meta-value">In Study</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Added</div>
+                <div class="meta-value">June 2026</div>
+            </div>
+        </div>
+
+        <!-- Media Links -->
+        <div class="section">
+            <h2>🎵 Listen</h2>
+            <p>Find authentic performances:</p>
+            <div class="media-links">
+                <a href="https://www.youtube.com" class="media-link">▶ YouTube</a>
+                <a href="https://www.spotify.com" class="media-link">♪ Spotify</a>
+                <a href="https://music.apple.com" class="media-link">🎶 Apple Music</a>
+            </div>
+        </div>
+
+        <!-- Lyrics -->
+        <div class="section">
+            <h2>📝 Lyrics</h2>
+            <h3>Full Portuguese Lyrics</h3>
+            <div class="lyrics-box">
+                A maré tá cheia<br>
+                Ê, ê, ê<br>
+                A maré tá cheia<br>
+                Olha só o peixe<br>
+                Que pulou na areia<br>
+                <br>
+                [Additional verses would go here]
+            </div>
+
+            <h3>English Translation</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Portuguese</th>
+                        <th>English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A maré tá cheia</td>
+                        <td>The tide is full</td>
+                    </tr>
+                    <tr>
+                        <td>Ê, ê, ê</td>
+                        <td>Hey, hey, hey (rhythmic exclamation)</td>
+                    </tr>
+                    <tr>
+                        <td>Olha só o peixe</td>
+                        <td>Look at the fish (look only at the fish)</td>
+                    </tr>
+                    <tr>
+                        <td>Que pulou na areia</td>
+                        <td>That jumped into the sand</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pronunciation -->
+        <div class="section">
+            <h2>🔊 Pronunciation</h2>
+            <div class="pronunciation">
+                <div class="pronunciation-text">A maré tá cheia</div>
+                <div class="pronunciation-guide">ah mah-REH tah SHAY-ah</div>
+            </div>
+            <div class="pronunciation">
+                <div class="pronunciation-text">Olha só o peixe</div>
+                <div class="pronunciation-guide">OH-lyah SOH oh PAY-shuh</div>
+            </div>
+            <div class="pronunciation">
+                <div class="pronunciation-text">Que pulou na areia</div>
+                <div class="pronunciation-guide">kuh poo-LOH nah ah-RAY-ah</div>
+            </div>
+        </div>
+
+        <!-- Vocabulary -->
+        <div class="section">
+            <h2>📚 Vocabulary</h2>
+            <p>Every word from the song, explained:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Word</th>
+                        <th>Meaning</th>
+                        <th>Part of Speech</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>maré</strong></td>
+                        <td>tide</td>
+                        <td><span class="vocab-badge">noun (f)</span></td>
+                        <td>Feminine. Refers to ocean tide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>tá</strong></td>
+                        <td>is (contracted form of "está")</td>
+                        <td><span class="vocab-badge">verb</span></td>
+                        <td>Present tense, 3rd person singular. "Está" = "is" (location/condition)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>cheia</strong></td>
+                        <td>full</td>
+                        <td><span class="vocab-badge">adjective</span></td>
+                        <td>Feminine form. Agrees with "maré" (feminine noun)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ê</strong></td>
+                        <td>hey (rhythmic call)</td>
+                        <td><span class="vocab-badge">interjection</span></td>
+                        <td>Traditional Capoeira exclamation. Used to encourage rhythm.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>olha</strong></td>
+                        <td>look</td>
+                        <td><span class="vocab-badge">verb</span></td>
+                        <td>Imperative (command). "Olhar" = "to look"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>só</strong></td>
+                        <td>only, just</td>
+                        <td><span class="vocab-badge">adverb</span></td>
+                        <td>Can mean "only" or "just." Here: "look only at the fish"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>o</strong></td>
+                        <td>the</td>
+                        <td><span class="vocab-badge">article</span></td>
+                        <td>Masculine singular. "O peixe" = "the fish" (masculine)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>peixe</strong></td>
+                        <td>fish</td>
+                        <td><span class="vocab-badge">noun (m)</span></td>
+                        <td>Masculine. Singular. Common in Capoeira imagery (agility, movement)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>que</strong></td>
+                        <td>that, which</td>
+                        <td><span class="vocab-badge">relative pronoun</span></td>
+                        <td>Connects relative clause: "the fish that jumped"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>pulou</strong></td>
+                        <td>jumped</td>
+                        <td><span class="vocab-badge">verb</span></td>
+                        <td>Past tense (preterite), 3rd person singular. "Pular" = "to jump"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>na</strong></td>
+                        <td>in the (contraction of "em" + "a")</td>
+                        <td><span class="vocab-badge">preposition + article</span></td>
+                        <td>Feminine form. "Em" (in) + "a" (the, feminine)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>areia</strong></td>
+                        <td>sand</td>
+                        <td><span class="vocab-badge">noun (f)</span></td>
+                        <td>Feminine. The setting of this poetic image.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Grammar -->
+        <div class="section">
+            <h2>📖 Grammar</h2>
+
+            <h3>Verb Forms</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Form in Song</th>
+                        <th>Base Verb</th>
+                        <th>Tense / Mood</th>
+                        <th>Meaning</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>tá (está)</td>
+                        <td>estar</td>
+                        <td>Present indicative</td>
+                        <td>is (state/location)</td>
+                        <td>3rd person singular. Contracted form common in speech.</td>
+                    </tr>
+                    <tr>
+                        <td>olha</td>
+                        <td>olhar</td>
+                        <td>Imperative</td>
+                        <td>look!</td>
+                        <td>Command form, 2nd person (you/você). Positive command.</td>
+                    </tr>
+                    <tr>
+                        <td>pulou</td>
+                        <td>pular</td>
+                        <td>Preterite (past)</td>
+                        <td>jumped</td>
+                        <td>3rd person singular. Completed action in past.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Adjective Agreement</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Adjective</th>
+                        <th>Noun</th>
+                        <th>Agreement Rule</th>
+                        <th>Example in Song</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>cheia (full)</td>
+                        <td>maré (tide - feminine)</td>
+                        <td>Adjectives agree with noun gender. Feminine noun = feminine adjective.</td>
+                        <td>"A maré <strong>cheia</strong>" (not "cheio" which is masculine)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Sentence Structure</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Explanation</th>
+                        <th>Example from Song</th>
+                        <th>New Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Subject + Verb + Adjective</strong></td>
+                        <td>Simple descriptive sentences. The subject (A maré) + verb (tá) + quality (cheia).</td>
+                        <td>"A maré tá cheia" = The tide is full</td>
+                        <td>"A agua tá fria" = The water is cold</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Verb + Article + Noun</strong></td>
+                        <td>Imperative command with object. Verb first, then what to look at.</td>
+                        <td>"Olha só o peixe" = Look only at the fish</td>
+                        <td>"Olha a lua" = Look at the moon</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Relative Clause: Noun + que + Verb</strong></td>
+                        <td>Describes a noun with "that" or "which." The "que" connects the noun to what it does.</td>
+                        <td>"o peixe que pulou" = the fish that jumped</td>
+                        <td>"o menino que dança" = the boy that dances</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Poetic & Traditional Language</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expression</th>
+                        <th>Literal Meaning</th>
+                        <th>How It's Used</th>
+                        <th>Cultural Context</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"A maré tá cheia"</td>
+                        <td>The tide is full</td>
+                        <td>Describes the ocean at high tide. Used metaphorically in Capoeira to represent abundance, fullness, energy.</td>
+                        <td>Ocean imagery is common in Capoeira songs, connecting to African maritime traditions and the history of enslaved people near the coast.</td>
+                    </tr>
+                    <tr>
+                        <td>"O peixe que pulou"</td>
+                        <td>The fish that jumped</td>
+                        <td>Fish jumping is symbolic of agility, freedom, and quick movement—qualities valued in Capoeira.</td>
+                        <td>Animal imagery is central to Capoeira—the ginga (basic movement) mimics natural creatures.</td>
+                    </tr>
+                    <tr>
+                        <td>"Ê, ê, ê"</td>
+                        <td>Hey! Hey! Hey!</td>
+                        <td>A rhythmic call used in Capoeira to encourage movement and maintain rhythm during the roda (circle).</td>
+                        <td>These exclamations come from African call-and-response traditions, central to Capoeira culture.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Cultural Context -->
+        <div class="section">
+            <h2>🌍 Cultural Context</h2>
+            <div class="cultural-note">
+                <p><strong>Origin:</strong> "A Maré Tá Cheia" is a traditional Capoeira corrido (song with a leader and chorus). Its exact origins are unknown, but it's part of the Capoeira Angola tradition, emphasizing connection to water, nature, and freedom.</p>
+                <p><strong>Significance:</strong> The song reflects the African diaspora's deep connection to the ocean—many Africans arrived in Brazil by sea, and water symbolizes freedom, cleansing, and spiritual power in African traditions.</p>
+                <p><strong>Tradition:</strong> This corrido is widely taught in Capoeira schools because of its simple vocabulary, strong rhythm, and rich metaphorical content. It's appropriate for beginners but carries profound cultural meaning.</p>
+                <p><strong>Usage:</strong> Traditionally sung during the roda (circle), with the mestre (master) singing the lead and students joining in the chorus. The rhythm encourages flowing movements and celebrates the natural world.</p>
+            </div>
+        </div>
+
+        <!-- Repeated Expressions -->
+        <div class="section">
+            <h2>🔄 Chorus & Repeated Expressions</h2>
+            <ul style="margin-left: 20px; line-height: 1.8; margin-top: 15px;">
+                <li><strong>"A maré tá cheia"</strong> — The main call. Establishes the central image and rhythm. Repeated multiple times for emphasis and to maintain the roda's beat.</li>
+                <li><strong>"Ê, ê, ê"</strong> — Response or rhythmic filler. Keeps the energy up and allows singers to breathe between phrases.</li>
+                <li><strong>"Olha só o peixe / Que pulou na areia"</strong> — The narrative verses. Leaders may improvise variations here while keeping this core image.</li>
+            </ul>
+        </div>
+
+        <!-- Practice -->
+        <div class="section">
+            <div class="practice-box">
+                <h4>✏️ Practice Exercises</h4>
+                <ol>
+                    <li><strong>Write 2 new sentences</strong> using vocabulary from this song (maré, peixe, tá, pulou, areia, olha)</li>
+                    <li><strong>Reuse the pattern:</strong> "[Subject] tá [adjective]" in a new context. Example: "O menino tá cansado" (The boy is tired)</li>
+                    <li><strong>Identify the tense:</strong> Find all past-tense verbs. What form is "pulou"? Why past tense?</li>
+                    <li><strong>Recite or sing</strong> the chorus slowly 3 times, focusing on pronunciation</li>
+                    <li><strong>Adjective agreement:</strong> If "peixe" were feminine (peixa), how would "cheia" change? (Answer: it wouldn't—only the noun would change)</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="poc.html" class="btn btn-back">← Back to Home</a>
+            <a href="#" class="btn btn-quiz">Take Quiz →</a>
+        </div>
+    </div>
+</body>
+</html>

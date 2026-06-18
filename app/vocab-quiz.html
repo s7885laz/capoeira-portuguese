@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Quiz · Capoeira Portuguese</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #009c3b 0%, #ffd700 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .back-link {
+            color: #009c3b;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            border: 2px solid #ffd700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .back-link:hover { background: #ffd700; color: #009c3b; }
+        h1 { color: #009c3b; font-size: 1.6em; flex: 1; }
+
+        .progress-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .progress-track {
+            flex: 1;
+            height: 10px;
+            background: #f0f0f0;
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #009c3b, #ffd700);
+            border-radius: 99px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+        .progress-label { font-size: 0.85em; color: #666; white-space: nowrap; }
+
+        .score-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+        .score-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #ffe8a6 100%);
+            border: 2px solid #ffd700;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        .score-box .label { font-size: 0.8em; color: #666; }
+        .score-box .value { font-size: 1.6em; font-weight: bold; color: #009c3b; }
+
+        .question-card {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .question-meta { font-size: 0.8em; color: #999; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .question-word { font-size: 2.4em; font-weight: 700; color: #009c3b; margin-bottom: 6px; }
+        .question-hint { font-size: 0.85em; color: #888; font-style: italic; margin-bottom: 14px; }
+        .replay-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: white;
+            border: 2px solid #009c3b;
+            color: #009c3b;
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .replay-btn:hover { background: #e6f9ee; }
+        .replay-btn:disabled { opacity: 0.5; cursor: default; }
+
+        .blind-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid #4a90e2;
+            border-radius: 10px;
+            padding: 32px 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .blind-card .question-meta { color: #7ab3f0; }
+        .blind-card .blind-icon { font-size: 3em; margin: 8px 0 16px; }
+        .blind-card .blind-label { font-size: 0.9em; color: #7ab3f0; margin-bottom: 18px; }
+        .blind-card .replay-btn {
+            background: transparent;
+            border-color: #4a90e2;
+            color: #7ab3f0;
+            font-size: 1em;
+            padding: 10px 24px;
+        }
+        .blind-card .replay-btn:hover { background: rgba(74,144,226,0.15); }
+
+        .settings-bar {
+            background: #f8f8f8;
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .settings-bar label { font-size: 0.85em; color: #555; white-space: nowrap; }
+        .settings-bar input[type=range] { flex: 1; min-width: 100px; accent-color: #009c3b; }
+        .settings-bar .pct-badge {
+            background: #009c3b;
+            color: white;
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 0.82em;
+            font-weight: 700;
+            white-space: nowrap;
+            min-width: 80px;
+            text-align: center;
+        }
+        .mode-tag {
+            display: inline-block;
+            font-size: 0.7em;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            vertical-align: middle;
+            margin-left: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .mode-tag.visual { background: #fef3c7; color: #92680a; }
+        .mode-tag.blind  { background: #dbeafe; color: #1e40af; }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .option-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px 14px;
+            font-size: 0.95em;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+            color: #333;
+            line-height: 1.4;
+        }
+        .option-btn:hover:not(:disabled) { border-color: #009c3b; background: #f0fff5; }
+        .option-letter {
+            display: inline-block;
+            width: 22px; height: 22px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 22px;
+            font-size: 0.8em;
+            font-weight: 700;
+            margin-right: 8px;
+            transition: all 0.2s;
+            vertical-align: middle;
+        }
+        .option-btn.correct { border-color: #009c3b; background: #e6f9ee; color: #006b28; }
+        .option-btn.correct .option-letter { background: #009c3b; color: white; }
+        .option-btn.wrong { border-color: #e53e3e; background: #fff5f5; color: #c53030; }
+        .option-btn.wrong .option-letter { background: #e53e3e; color: white; }
+        .option-btn.reveal-correct { border-color: #009c3b; background: #e6f9ee; color: #006b28; opacity: 0.75; }
+        .option-btn:disabled { cursor: default; }
+
+        .feedback {
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.5;
+            display: none;
+        }
+        .feedback.correct { background: #e6f9ee; border-left: 4px solid #009c3b; color: #006b28; }
+        .feedback.wrong   { background: #fff5f5; border-left: 4px solid #e53e3e; color: #c53030; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #009c3b 0%, #00a852 100%);
+            color: white;
+            border: 2px solid #ffd700;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+            display: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #009c3b;
+            box-shadow: 0 4px 12px rgba(255,215,0,0.3);
+        }
+
+        #results-screen { display: none; text-align: center; }
+        .results-emoji { font-size: 3.5em; margin-bottom: 12px; }
+        .results-score { font-size: 3em; font-weight: 800; color: #009c3b; margin-bottom: 6px; }
+        .results-subtitle { color: #666; margin-bottom: 28px; }
+        .results-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .breakdown-box { padding: 16px; border-radius: 8px; font-weight: 700; font-size: 1.1em; }
+        .breakdown-box.correct-box { background: #e6f9ee; color: #006b28; }
+        .breakdown-box.wrong-box   { background: #fff5f5; color: #c53030; }
+        .results-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .btn-secondary {
+            background: white;
+            color: #009c3b;
+            border: 2px solid #009c3b;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { background: #f0fff5; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <a href="index.html" class="back-link">← Back</a>
+        <h1>🎵 Vocab Quiz</h1>
+    </div>
+
+    <div class="settings-bar">
+        <label>🎧 Listening-only questions:</label>
+        <input type="range" id="blind-pct" min="0" max="100" step="10" value="30"
+               oninput="updateBlindLabel(this.value)" />
+        <span class="pct-badge" id="blind-badge">30% blind</span>
+    </div>
+
+    <div id="quiz-screen">
+        <div class="progress-row">
+            <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="progress-label" id="progress-label">1 / 10</div>
+        </div>
+
+        <div class="score-strip">
+            <div class="score-box"><div class="label">Question</div><div class="value" id="stat-q">1</div></div>
+            <div class="score-box"><div class="label">✅ Correct</div><div class="value" id="stat-correct">0</div></div>
+            <div class="score-box"><div class="label">❌ Wrong</div><div class="value" id="stat-wrong">0</div></div>
+        </div>
+
+        <!-- Visual question card (word shown) -->
+        <div class="question-card" id="visual-card">
+            <div class="question-meta">What does this word mean? <span class="mode-tag visual">read</span></div>
+            <div class="question-word" id="q-word"></div>
+            <div class="question-hint" id="q-hint"></div>
+            <button class="replay-btn" id="replay-btn" onclick="pronounce()">🔊 Hear it again</button>
+        </div>
+
+        <!-- Blind question card (word hidden) -->
+        <div class="blind-card" id="blind-card" style="display:none;">
+            <div class="question-meta">What does this word mean? <span class="mode-tag blind">listen</span></div>
+            <div class="blind-icon">🎧</div>
+            <div class="blind-label">Listen carefully — the word is not shown</div>
+            <button class="replay-btn" id="blind-replay-btn" onclick="pronounce()">🔊 Play again</button>
+        </div>
+
+        <div class="options" id="options"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="btn-primary" id="next-btn" onclick="nextQuestion()"></button>
+    </div>
+
+    <div id="results-screen">
+        <div class="results-emoji" id="results-emoji"></div>
+        <div class="results-score" id="results-score"></div>
+        <div class="results-subtitle" id="results-subtitle"></div>
+        <div class="results-breakdown">
+            <div class="breakdown-box correct-box" id="results-correct"></div>
+            <div class="breakdown-box wrong-box"   id="results-wrong"></div>
+        </div>
+        <div class="results-actions">
+            <button class="btn-secondary" onclick="startQuiz()">🔄 New quiz</button>
+            <a href="index.html" class="btn-secondary">🏠 Home</a>
+        </div>
+    </div>
+
+</div>
+<script>
+let currentAudio = null;
+
+function ttsUrl(text) {
+    return 'https://translate.google.com/translate_tts?ie=UTF-8&q=' + encodeURIComponent(text) + '&tl=pt-BR&ttsspeed=0.4&client=tw-ob';
+}
+
+let currentWord = '';
+
+function pronounce() {
+    const text = currentWord;
+    if (!text) return;
+    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+    const btnId = isBlind ? 'blind-replay-btn' : 'replay-btn';
+    const origLabel = isBlind ? '🔊 Play again' : '🔊 Hear it again';
+    const btn = document.getElementById(btnId);
+    const audio = new Audio(ttsUrl(text));
+    currentAudio = audio;
+    if (btn) { btn.disabled = true; btn.textContent = '♪ Playing…'; }
+    audio.play().catch(() => {});
+    audio.onended = audio.onerror = () => {
+        currentAudio = null;
+        if (btn) { btn.disabled = false; btn.textContent = origLabel; }
+    };
+}
+
+let VOCAB = [];
+fetch('../progress/vocab-log.json')
+    .then(r => r.json())
+    .then(data => { VOCAB = data; startQuiz(); })
+    .catch(() => {
+        document.getElementById('quiz-screen').innerHTML =
+            '<p style="color:#c53030;text-align:center;padding:2rem;">⚠️ Could not load vocab-log.json.<br>Make sure the file exists at <code>progress/vocab-log.json</code>.</p>';
+    });
+
+const TOTAL_Q = 10;
+const OPTIONS_N = 4;
+
+let questions = [], current = 0, correct = 0, wrong = 0, answered = false, isBlind = false;
+
+function updateBlindLabel(val) {
+    const badge = document.getElementById('blind-badge');
+    badge.textContent = val == 0 ? 'no blind' : val == 100 ? '100% blind' : val + '% blind';
+}
+
+function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function startQuiz() {
+    questions = shuffle(VOCAB).slice(0, Math.min(TOTAL_Q, VOCAB.length));
+    current = 0; correct = 0; wrong = 0;
+    document.getElementById('results-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    renderQuestion();
+}
+
+function buildOptions(correctEntry) {
+    const distractors = shuffle(
+        VOCAB.filter(e => e.word !== correctEntry.word && e.meaning !== correctEntry.meaning)
+    ).slice(0, OPTIONS_N - 1);
+    return shuffle([correctEntry, ...distractors]);
+}
+
+function renderQuestion() {
+    answered = false;
+    const entry = questions[current];
+    const total = questions.length;
+
+    const blindPct = parseInt(document.getElementById('blind-pct').value, 10);
+    isBlind = Math.random() * 100 < blindPct;
+    currentWord = entry.word;
+
+    const pct = (current / total) * 100;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = (current + 1) + ' / ' + total;
+    document.getElementById('stat-q').textContent = current + 1;
+    document.getElementById('stat-correct').textContent = correct;
+    document.getElementById('stat-wrong').textContent = wrong;
+
+    const visualCard = document.getElementById('visual-card');
+    const blindCard  = document.getElementById('blind-card');
+
+    if (isBlind) {
+        visualCard.style.display = 'none';
+        blindCard.style.display  = 'block';
+        const br = document.getElementById('blind-replay-btn');
+        br.disabled = false; br.textContent = '🔊 Play again';
+    } else {
+        blindCard.style.display  = 'none';
+        visualCard.style.display = 'block';
+        document.getElementById('q-word').textContent = entry.word;
+        const sources = Array.isArray(entry.source_content) ? entry.source_content : [entry.source_content];
+        const songNames = sources.map(s => s.replace(/^song-/, '').replace(/-/g, ' ')).join(', ');
+        document.getElementById('q-hint').textContent = 'from: ' + songNames;
+        const rr = document.getElementById('replay-btn');
+        rr.disabled = false; rr.textContent = '🔊 Hear it again';
+    }
+
+    const opts = buildOptions(entry);
+    const letters = ['A', 'B', 'C', 'D'];
+    const optionsEl = document.getElementById('options');
+    optionsEl.innerHTML = '';
+    opts.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.dataset.word = opt.word;
+        btn.dataset.meaning = opt.meaning;
+        btn.innerHTML = '<span class="option-letter">' + letters[i] + '</span>' + opt.meaning;
+        btn.onclick = () => selectAnswer(btn, opt, entry);
+        optionsEl.appendChild(btn);
+    });
+
+    const fb = document.getElementById('feedback');
+    fb.style.display = 'none';
+    fb.className = 'feedback';
+    document.getElementById('next-btn').style.display = 'none';
+
+    setTimeout(() => pronounce(), 400);
+}
+
+function selectAnswer(btn, chosen, correctEntry) {
+    if (answered) return;
+    answered = true;
+    const isCorrect = chosen.word === correctEntry.word;
+    const allBtns = document.querySelectorAll('.option-btn');
+
+    allBtns.forEach(b => {
+        b.disabled = true;
+        if (b.dataset.word === correctEntry.word) {
+            b.classList.add(isCorrect ? 'correct' : 'reveal-correct');
+        }
+    });
+
+    if (isCorrect) {
+        btn.classList.remove('reveal-correct');
+        btn.classList.add('correct');
+        correct++;
+    } else {
+        btn.classList.add('wrong');
+        wrong++;
+    }
+
+    document.getElementById('stat-correct').textContent = correct;
+    document.getElementById('stat-wrong').textContent = wrong;
+
+    const fb = document.getElementById('feedback');
+    const wordSpan = '<em>' + correctEntry.word + '</em>';
+    if (isCorrect) {
+        fb.className = 'feedback correct';
+        fb.innerHTML = '✅ <strong>Correct!</strong> ' + (isBlind ? 'The word was ' + wordSpan + '. It' : wordSpan) + ' means "' + correctEntry.meaning + '".';
+    } else {
+        fb.className = 'feedback wrong';
+        fb.innerHTML = '❌ <strong>Not quite.</strong> ' + (isBlind ? 'The word was ' + wordSpan + '. It' : wordSpan) + ' means "<strong>' + correctEntry.meaning + '</strong>", not "' + chosen.meaning + '".';
+    }
+    fb.style.display = 'block';
+
+    const nextBtn = document.getElementById('next-btn');
+    nextBtn.textContent = (current + 1 >= questions.length) ? 'See results 🎯' : 'Next question →';
+    nextBtn.style.display = 'block';
+}
+
+function nextQuestion() {
+    current++;
+    if (current >= questions.length) showResults();
+    else renderQuestion();
+}
+
+function showResults() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('results-screen').style.display = 'block';
+    document.getElementById('progress-fill').style.width = '100%';
+
+    const total = questions.length;
+    const pct = Math.round((correct / total) * 100);
+    let emoji, subtitle;
+    if (pct === 100)     { emoji = '🏆'; subtitle = 'Perfect score! Axé!'; }
+    else if (pct >= 80)  { emoji = '🎵'; subtitle = 'Great work — keep playing capoeira!'; }
+    else if (pct >= 60)  { emoji = '💪'; subtitle = 'Solid effort. Keep practising!'; }
+    else if (pct >= 40)  { emoji = '🌊'; subtitle = 'Keep going — the tide will turn!'; }
+    else                 { emoji = '🥋'; subtitle = 'Every mestre started as a beginner!'; }
+
+    document.getElementById('results-emoji').textContent = emoji;
+    document.getElementById('results-score').textContent = pct + '%';
+    document.getElementById('results-subtitle').textContent = subtitle;
+    document.getElementById('results-correct').textContent = '✅ ' + correct + ' correct';
+    document.getElementById('results-wrong').textContent   = '❌ ' + wrong + ' wrong';
+}
+
+</script>
+</body>
+</html>

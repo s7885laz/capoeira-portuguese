@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai, Ai, Aidê - Capoeira Portuguese Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #009c3b 0%, #003da5 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #009c3b;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            color: #009c3b;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        .meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .meta-item {
+            text-align: center;
+        }
+        .meta-label {
+            color: #999;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+        .meta-value {
+            color: #009c3b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section h2 {
+            color: #009c3b;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-left: 4px solid #009c3b;
+            padding-left: 15px;
+        }
+        .section h3 {
+            color: #003da5;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th {
+            background: #009c3b;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover {
+            background: #f9f9f9;
+        }
+        .lyrics-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #003da5;
+            font-style: italic;
+            line-height: 1.8;
+            margin: 20px 0;
+            white-space: pre-wrap;
+        }
+        .pronunciation {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        .pronunciation-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .pronunciation-guide {
+            color: #666;
+            font-style: italic;
+        }
+        .cultural-note {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #009c3b;
+            margin: 20px 0;
+        }
+        .cultural-note p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        .vocab-badge {
+            display: inline-block;
+            background: #009c3b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+        .practice-box {
+            background: #f0fff4;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+        .practice-box h4 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        .practice-box ol, .practice-box ul {
+            margin-left: 20px;
+        }
+        .practice-box li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .media-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .media-link {
+            display: inline-block;
+            background: #009c3b;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: background 0.3s;
+        }
+        .media-link:hover {
+            background: #003da5;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            justify-content: space-between;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            text-align: center;
+        }
+        .btn-back {
+            background: #6c757d;
+            color: white;
+            flex: 1;
+        }
+        .btn-back:hover {
+            background: #5a6268;
+        }
+        .btn-quiz {
+            background: #28a745;
+            color: white;
+            flex: 1;
+        }
+        .btn-quiz:hover {
+            background: #218838;
+        }
+        .difficulty {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .difficulty-3 {
+            background: #fff3cd;
+            color: #664d03;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Ai, Ai, Aidê</h1>
+            <p>Traditional Capoeira Song</p>
+        </div>
+
+        <div class="meta">
+            <div class="meta-item">
+                <div class="meta-label">Type</div>
+                <div class="meta-value">Corrido</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Difficulty</div>
+                <div class="meta-value"><span class="difficulty difficulty-3">3/5</span></div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Status</div>
+                <div class="meta-value">In Study</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Added</div>
+                <div class="meta-value">June 2026</div>
+            </div>
+        </div>
+
+        <!-- Media Links -->
+        <div class="section">
+            <h2>🎵 Listen</h2>
+            <div class="media-links">
+                <a href="https://www.youtube.com/watch?v=-t3bB4q9mpc" class="media-link">▶ YouTube (Teaching)</a>
+                <a href="https://www.youtube.com/watch?v=2jkaDsta-3w" class="media-link">▶ YouTube (1996 Recording)</a>
+                <a href="https://www.youtube.com/watch?v=duFWbYmhN2g" class="media-link">▶ Roda Performance</a>
+            </div>
+        </div>
+
+        <!-- Lyrics -->
+        <div class="section">
+            <h2>📝 Lyrics</h2>
+            <h3>Full Portuguese Lyrics</h3>
+            <div class="lyrics-box">Ai, ai, Aidê
+Joga bonito que eu quero ver
+Ai, ai, Aidê
+Joga uma coisa que eu quero aprender
+Ai, ai, Aidê
+Aidê, Aidê, Aidê, Aidê
+Ai, ai, Aidê
+Joga menino que eu quero aprender
+Ai, ai, Aidê
+Joga pra mim que eu jogo pra você
+Ai, ai, Aidê
+Ô era eu, era você
+Ai, ai, Aidê
+Joga bonito que o bom é você
+Ai, ai, Aidê
+Joga certinho pra mim aprender
+Ai, ai, Aidê
+Joga pra lá que eu não quero apanhar
+Ai, ai, Aidê
+Joga capoeira é bonito pra ver
+Ai, ai, Aidê
+Capoeira é malícia, é mandinga, é prazer
+Ai, ai, Aidê
+Como vai, como passou, como vai vosmicê?
+Ai, ai, Aidê
+Eu venci a batalha de Camugerê
+Ai, ai, Aidê
+Ô era eu, era meu mano
+Ai, ai, Aidê
+Aidê, Aidê, cadê você?
+Ai, ai, Aidê
+            </div>
+
+            <h3>English Translation</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Portuguese</th>
+                        <th>English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ai, ai, Aidê</td>
+                        <td>Ah, ah, Aidê (exclamation + name)</td>
+                    </tr>
+                    <tr>
+                        <td>Joga bonito que eu quero ver</td>
+                        <td>Play beautifully because I want to see</td>
+                    </tr>
+                    <tr>
+                        <td>Joga uma coisa que eu quero aprender</td>
+                        <td>Play something that I want to learn</td>
+                    </tr>
+                    <tr>
+                        <td>Joga menino que eu quero aprender</td>
+                        <td>Play, boy/kid, because I want to learn</td>
+                    </tr>
+                    <tr>
+                        <td>Joga pra mim que eu jogo pra você</td>
+                        <td>Play for me and I'll play for you</td>
+                    </tr>
+                    <tr>
+                        <td>Ô era eu, era você</td>
+                        <td>Oh, it was me, it was you</td>
+                    </tr>
+                    <tr>
+                        <td>Joga capoeira é bonito pra ver</td>
+                        <td>Playing capoeira is beautiful to watch</td>
+                    </tr>
+                    <tr>
+                        <td>Capoeira é malícia, é mandinga, é prazer</td>
+                        <td>Capoeira is cunning, it is magic, it is pleasure</td>
+                    </tr>
+                    <tr>
+                        <td>Eu venci a batalha de Camugerê</td>
+                        <td>I won the battle of Camugerê</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pronunciation -->
+        <div class="section">
+            <h2>🔊 Pronunciation</h2>
+            <div class="pronunciation">
+                <div class="pronunciation-text">Ai, ai, Aidê</div>
+                <div class="pronunciation-guide">AH-ee, AH-ee, ah-ee-DEH</div>
+            </div>
+            <div class="pronunciation">
+                <div class="pronunciation-text">Joga bonito</div>
+                <div class="pronunciation-guide">ZHO-gah boh-NEE-too</div>
+            </div>
+            <div class="pronunciation">
+                <div class="pronunciation-text">Capoeira é malícia, é mandinga, é prazer</div>
+                <div class="pronunciation-guide">kah-poh-EH-rah eh mah-LEE-syah, eh mahn-JEEN-gah, eh prah-ZEHR</div>
+            </div>
+        </div>
+
+        <!-- Vocabulary -->
+        <div class="section">
+            <h2>📚 Vocabulary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Word</th>
+                        <th>Meaning</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ai</strong></td>
+                        <td>ah / oh</td>
+                        <td>Exclamation of feeling, pain, or longing; very common in Brazilian Portuguese</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aidê</strong></td>
+                        <td>Aidê</td>
+                        <td>Feminine proper name; a legendary enslaved African woman brought to Brazil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>joga</strong></td>
+                        <td>play / you play</td>
+                        <td>From jogar (to play); imperative (command) form: "play!"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>bonito</strong></td>
+                        <td>beautiful, pretty</td>
+                        <td>Adjective; masculine form (bonita = feminine)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>que</strong></td>
+                        <td>that / because</td>
+                        <td>Conjunction; here functions as "because" or "so that"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>eu</strong></td>
+                        <td>I</td>
+                        <td>First person singular pronoun</td>
+                    </tr>
+                    <tr>
+                        <td><strong>quero</strong></td>
+                        <td>I want</td>
+                        <td>Present tense of querer (to want)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ver</strong></td>
+                        <td>to see</td>
+                        <td>Infinitive; used after "quero"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>aprender</strong></td>
+                        <td>to learn</td>
+                        <td>Infinitive; key verb in this song</td>
+                    </tr>
+                    <tr>
+                        <td><strong>menino</strong></td>
+                        <td>boy, kid</td>
+                        <td>Noun, masculine; used affectionately or as mild rebuke</td>
+                    </tr>
+                    <tr>
+                        <td><strong>pra</strong></td>
+                        <td>for / to</td>
+                        <td>Contraction of para; very common in spoken Brazilian Portuguese</td>
+                    </tr>
+                    <tr>
+                        <td><strong>mim</strong></td>
+                        <td>me</td>
+                        <td>First person object pronoun (used after prepositions)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>você</strong></td>
+                        <td>you</td>
+                        <td>Informal second person pronoun</td>
+                    </tr>
+                    <tr>
+                        <td><strong>era</strong></td>
+                        <td>was / it was</td>
+                        <td>Imperfect past tense of ser (to be)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>malícia</strong></td>
+                        <td>cunning, trickery</td>
+                        <td>Core concept in capoeira: deceptive cleverness</td>
+                    </tr>
+                    <tr>
+                        <td><strong>mandinga</strong></td>
+                        <td>magic, spell, enchantment</td>
+                        <td>Spiritual power and trickery in capoeira</td>
+                    </tr>
+                    <tr>
+                        <td><strong>prazer</strong></td>
+                        <td>pleasure</td>
+                        <td>Masculine noun</td>
+                    </tr>
+                    <tr>
+                        <td><strong>venci</strong></td>
+                        <td>I won</td>
+                        <td>Preterite past tense of vencer (to win/defeat)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>batalha</strong></td>
+                        <td>battle</td>
+                        <td>Feminine noun</td>
+                    </tr>
+                    <tr>
+                        <td><strong>cadê</strong></td>
+                        <td>where is / where are</td>
+                        <td>Colloquial contraction of "Onde está"; very common in Brazil</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Grammar -->
+        <div class="section">
+            <h2>📖 Grammar</h2>
+
+            <h3>Verb Forms</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Form</th>
+                        <th>Base Verb</th>
+                        <th>Tense</th>
+                        <th>Meaning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>joga</td>
+                        <td>jogar</td>
+                        <td>Imperative</td>
+                        <td>Play!</td>
+                    </tr>
+                    <tr>
+                        <td>quero</td>
+                        <td>querer</td>
+                        <td>Present indicative</td>
+                        <td>I want</td>
+                    </tr>
+                    <tr>
+                        <td>era</td>
+                        <td>ser</td>
+                        <td>Imperfect</td>
+                        <td>it was</td>
+                    </tr>
+                    <tr>
+                        <td>venci</td>
+                        <td>vencer</td>
+                        <td>Preterite</td>
+                        <td>I won</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Sentence Patterns</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Explanation</th>
+                        <th>Example from Song</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Joga [description] que eu quero [infinitive]</strong></td>
+                        <td>Imperative + purpose clause: "Play [X] because I want to [Y]"</td>
+                        <td>Joga bonito que eu quero ver</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Joga pra [pronoun] que eu jogo pra [pronoun]</strong></td>
+                        <td>Reciprocal action: "Do for me and I'll do for you"</td>
+                        <td>Joga pra mim que eu jogo pra você</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Era [pronoun], era [pronoun]</strong></td>
+                        <td>Identification in past: "It was [X], it was [Y]"</td>
+                        <td>Ô era eu, era você</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Cultural Context -->
+        <div class="section">
+            <h2>🌍 Cultural Context</h2>
+            <div class="cultural-note">
+                <p><strong>Aidê</strong> is said to be the name of an enslaved African woman brought to Brazil, renowned for her beauty and spiritual presence. Her story is embedded in capoeira oral tradition as a symbol of African identity and suffering under slavery.</p>
+                <p><strong>The Song:</strong> "Ai, Ai, Aidê" is a corrido — a short, fast call-and-response song used to keep energy high during the roda (capoeira circle). It's among the most widely taught corridos in both Capoeira Angola and Capoeira Regional traditions.</p>
+                <p><strong>Famous Definition:</strong> The line "Capoeira é malícia, é mandinga, é prazer" is one of the most famous definitions of capoeira, encapsulating its three pillars — cunning intelligence (malícia), spiritual/magical power (mandinga), and joy (prazer).</p>
+                <p><strong>Notable Recording:</strong> A prestigious recording exists by Grupo de Capoeira Angola Pelourinho, produced by Mestre Cobra Mansa, released in 1996 on Smithsonian Folkways — one of the world's most prestigious archival labels.</p>
+            </div>
+        </div>
+
+        <!-- Practice -->
+        <div class="section">
+            <div class="practice-box">
+                <h4>✏️ Practice Exercises</h4>
+                <ol>
+                    <li><strong>Write 2 new sentences using song vocabulary:</strong>
+                        <ul style="margin-top: 5px;">
+                            <li>Eu quero aprender a jogar bonito.</li>
+                            <li>A vida é prazer, é luta, é amor.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Reuse 1 sentence structure:</strong> Song pattern: "Joga bonito que eu quero ver" → New: "Canta devagar que eu quero aprender" (Sing slowly so I can learn)</li>
+                    <li><strong>Identify verb form:</strong> Find "venci" — explain its tense and meaning</li>
+                    <li><strong>Recite or sing</strong> the chorus slowly: "AH-ee, AH-ee, ah-ee-DEH"</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="poc.html" class="btn btn-back">← Back to Home</a>
+            <a href="#" class="btn btn-quiz">Take Quiz →</a>
+        </div>
+    </div>
+</body>
+</html>

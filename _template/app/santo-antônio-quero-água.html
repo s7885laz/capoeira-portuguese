@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santo Antônio Quero Água - Capoeira Portuguese Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #009c3b 0%, #003da5 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #009c3b;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            color: #009c3b;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        .meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .meta-item {
+            text-align: center;
+        }
+        .meta-label {
+            color: #999;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+        .meta-value {
+            color: #009c3b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section h2 {
+            color: #009c3b;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-left: 4px solid #009c3b;
+            padding-left: 15px;
+        }
+        .section h3 {
+            color: #003da5;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th {
+            background: #009c3b;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover {
+            background: #f9f9f9;
+        }
+        .lyrics-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #003da5;
+            font-style: italic;
+            line-height: 1.8;
+            margin: 20px 0;
+            white-space: pre-wrap;
+        }
+        .pronunciation {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        .pronunciation-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .pronunciation-guide {
+            color: #666;
+            font-style: italic;
+        }
+        .cultural-note {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #009c3b;
+            margin: 20px 0;
+        }
+        .cultural-note p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        .practice-box {
+            background: #f0fff4;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+        .practice-box h4 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        .practice-box ol, .practice-box ul {
+            margin-left: 20px;
+        }
+        .practice-box li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .media-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .media-link {
+            display: inline-block;
+            background: #009c3b;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: background 0.3s;
+        }
+        .media-link:hover {
+            background: #003da5;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            justify-content: space-between;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            text-align: center;
+        }
+        .btn-back {
+            background: #6c757d;
+            color: white;
+            flex: 1;
+        }
+        .btn-back:hover {
+            background: #5a6268;
+        }
+        .btn-quiz {
+            background: #28a745;
+            color: white;
+            flex: 1;
+        }
+        .btn-quiz:hover {
+            background: #218838;
+        }
+        .difficulty {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .difficulty-2 {
+            background: #cfe2ff;
+            color: #084298;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Santo Antônio Quero Água</h1>
+            <p></p>
+        </div>
+
+        <div class="meta">
+            <div class="meta-item">
+                <div class="meta-label">Type</div>
+                <div class="meta-value">Corrido (call-and-response song)</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Difficulty</div>
+                <div class="meta-value"><span class="difficulty difficulty-2">2/5</span></div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Status</div>
+                <div class="meta-value">In Study</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Added</div>
+                <div class="meta-value">2026-06-17</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📝 Lyrics</h2>
+            <h3>Full Portuguese Lyrics</h3>
+<div class="lyrics-box">Santo Antônio eu quero água
+Santo Antônio eu quero água
+
+Quero água pra beber
+Quero água pra beber
+
+Quero água pra lavar
+Quero água pra lavar
+
+Quero água pra benzer
+Quero água pra benzer
+
+Eu quero água
+Eu quero água
+
+---</div>
+
+        </div>
+
+        <div class="section">
+            <h2>🔊 Pronunciation</h2>
+            <table>
+<thead>
+<tr>
+<th>Line / Phrase</th>
+<th>Pronunciation Help</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Santo Antônio</td>
+<td>SAHN-too ahn-TOH-nyoo</td>
+</tr>
+<tr>
+<td>eu quero água</td>
+<td>EH-oo KEH-roo AH-gwah</td>
+</tr>
+<tr>
+<td>Quero água pra beber</td>
+<td>KEH-roo AH-gwah prah beh-BEHR</td>
+</tr>
+<tr>
+<td>Quero água pra lavar</td>
+<td>KEH-roo AH-gwah prah lah-VAHR</td>
+</tr>
+<tr>
+<td>Quero água pra benzer</td>
+<td>KEH-roo AH-gwah prah behn-ZEHR</td>
+</tr>
+<tr>
+<td>Eu quero água</td>
+<td>EH-oo KEH-roo AH-gwah</td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+
+        <div class="section">
+            <h2>📚 Vocabulary</h2>
+            <table>
+<thead>
+<tr>
+<th>Word / Phrase</th>
+<th>Meaning</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Santo</td>
+<td>Saint</td>
+<td>Masculine noun/adjective; from Latin *sanctus*; used before the name of a saint</td>
+</tr>
+<tr>
+<td>Antônio</td>
+<td>Anthony</td>
+<td>Masculine proper name; the Portuguese form of Anthony; refers to Saint Anthony of Padua (Santo Antônio de Pádua), patron saint of Brazil</td>
+</tr>
+<tr>
+<td>Santo Antônio</td>
+<td>Saint Anthony</td>
+<td>Full name of the Catholic saint; one of the most venerated figures in Brazilian popular religion</td>
+</tr>
+<tr>
+<td>eu</td>
+<td>I</td>
+<td>First person singular subject pronoun</td>
+</tr>
+<tr>
+<td>quero</td>
+<td>I want</td>
+<td>First person singular, present indicative of *querer* (to want)</td>
+</tr>
+<tr>
+<td>água</td>
+<td>water</td>
+<td>Feminine noun (*a água*); note: despite starting with *a*, it takes masculine article *o* in some cases to avoid vowel collision, but *a água* is also used</td>
+</tr>
+<tr>
+<td>pra</td>
+<td>for / to</td>
+<td>Contracted form of *para*; standard in spoken Brazilian Portuguese</td>
+</tr>
+<tr>
+<td>beber</td>
+<td>to drink</td>
+<td>Verb infinitive; *beber* specifically means to drink liquids</td>
+</tr>
+<tr>
+<td>lavar</td>
+<td>to wash</td>
+<td>Verb infinitive; used for washing objects, hands, clothes, floors</td>
+</tr>
+<tr>
+<td>benzer</td>
+<td>to bless / to make holy</td>
+<td>Verb infinitive; from Latin *benedicere*; refers to the act of blessing water or a person, often with the sign of the cross</td>
+</tr>
+<tr>
+<td>Eu quero água</td>
+<td>I want water</td>
+<td>Full simple sentence; stands alone as the song's emotional core</td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+
+        <div class="section">
+            <h2>📖 Grammar</h2>
+            
+        </div>
+
+        <div class="section">
+            <h2>🌍 Cultural Context</h2>
+            <div class="cultural-note">
+                <p>**Santo Antônio (Saint Anthony of Padua)** is the patron saint of Brazil and one of the most beloved Catholic figures in Brazilian popular religion. He is invoked for miracles, finding lost objects and people, protection, and rain. Festivals in his honor (*Festa de Santo Antônio*) are celebrated across Brazil on June 13, especially in the Northeast.</p>
+<p>**Water in Afro-Brazilian spirituality** carries profound meaning. In Candomblé (the Afro-Brazilian religion that deeply shaped capoeira), water is associated with *Oxum* (goddess of fresh water, fertility, and love) and *Iemanjá* (goddess of the sea). Asking for water is never purely physical — it always carries spiritual weight.</p>
+<p>**Benzer (to bless)** refers to the act of blessing water to make it *água benta* (holy water), used in both Catholic rituals and Afro-Brazilian healing practices. A *benzedeira* (female folk healer) blesses water, herbs, and people to cure illness and ward off evil.</p>
+<p>**The three uses of water** — *beber* (drink), *lavar* (wash), *benzer* (bless) — represent a complete spiritual and physical cycle: sustaining the body, purifying it, and consecrating it. This progression is deeply meaningful in a culture where water equals life, cleanliness, and divine grace.</p>
+<p>**As a corrido**, this song is sung in the roda during the game. Its simplicity and repetition make it ideal for beginners and for maintaining the energy and rhythm of the roda. The directness of the lyrics — a simple plea to a saint — reflects the everyday blending of Catholic and African spiritual traditions in capoeira culture.</p>
+<p>The song is associated with the **Festa Junina** (June Festivals) season in Brazil, when Santo Antônio is celebrated. Capoeira groups often incorporate thematically relevant songs during this period.</p>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="practice-box">
+                <h4>✏️ Practice Exercises</h4>
+                <ol>
+<li>**Write 2 new sentences using song vocabulary:**</li>
+</ol>
+<ol>
+<li>**Reuse 1 sentence structure from the song in a new context:**</li>
+</ol>
+<ol>
+<li>**Identify 1 verb form and explain it:**</li>
+</ol>
+<ol>
+<li>**Recite or sing the chorus slowly:**</li>
+</ol>
+
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="poc.html" class="btn btn-back">← Back to Home</a>
+            <a href="#" class="btn btn-quiz">Take Quiz →</a>
+        </div>
+    </div>
+</body>
+</html>

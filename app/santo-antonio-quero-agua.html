@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santo Antônio Quero Água - Capoeira Portuguese Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #009c3b 0%, #003da5 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #009c3b;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            color: #009c3b;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        .meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .meta-item {
+            text-align: center;
+        }
+        .meta-label {
+            color: #999;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+        .meta-value {
+            color: #009c3b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section h2 {
+            color: #009c3b;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-left: 4px solid #009c3b;
+            padding-left: 15px;
+        }
+        .section h3 {
+            color: #003da5;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th {
+            background: #009c3b;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover {
+            background: #f9f9f9;
+        }
+        .lyrics-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #003da5;
+            font-style: italic;
+            line-height: 1.8;
+            margin: 20px 0;
+            white-space: pre-wrap;
+        }
+        .pronunciation {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        .pronunciation-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .pronunciation-guide {
+            color: #666;
+            font-style: italic;
+        }
+        .cultural-note {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #009c3b;
+            margin: 20px 0;
+        }
+        .cultural-note p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        .vocab-badge {
+            display: inline-block;
+            background: #009c3b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+        .practice-box {
+            background: #f0fff4;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+        .practice-box h4 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        .practice-box ol, .practice-box ul {
+            margin-left: 20px;
+        }
+        .practice-box li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .media-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .media-link {
+            display: inline-block;
+            background: #009c3b;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: background 0.3s;
+        }
+        .media-link:hover {
+            background: #003da5;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            justify-content: space-between;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            text-align: center;
+        }
+        .btn-back {
+            background: #6c757d;
+            color: white;
+            flex: 1;
+        }
+        .btn-back:hover {
+            background: #5a6268;
+        }
+        .btn-quiz {
+            background: #28a745;
+            color: white;
+            flex: 1;
+        }
+        .btn-quiz:hover {
+            background: #218838;
+        }
+        .difficulty {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .difficulty-1 {
+            background: #d4edda;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Santo Antônio Quero Água</h1>
+            <p>Saint Anthony, I Want Water</p>
+        </div>
+
+        <div class="meta">
+            <div class="meta-item">
+                <div class="meta-label">Type</div>
+                <div class="meta-value">Corrido</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Difficulty</div>
+                <div class="meta-value"><span class="difficulty difficulty-1">1/5</span></div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Status</div>
+                <div class="meta-value">In Study</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Added</div>
+                <div class="meta-value">June 2026</div>
+            </div>
+        </div>
+
+        <!-- Media Links -->
+        <div class="section">
+            <h2>🎵 Listen</h2>
+            <div class="media-links">
+                <a href="https://www.youtube.com/watch?v=2ampF2reQPM" class="media-link">▶ YouTube (with Lyrics)</a>
+                <a href="https://www.youtube.com/watch?v=2qRiCHcQvgY" class="media-link">▶ YouTube (Lyrics Version)</a>
+            </div>
+        </div>
+
+        <!-- Lyrics -->
+        <div class="section">
+            <h2>📝 Lyrics</h2>
+            <h3>Full Portuguese Lyrics</h3>
+            <div class="lyrics-box">Santo Antônio eu quero água
+Santo Antônio eu quero água
+
+Quero água pra beber
+Quero água pra beber
+
+Quero água pra lavar
+Quero água pra lavar
+
+Quero água pra benzer
+Quero água pra benzer
+
+Eu quero água
+Eu quero água
+            </div>
+
+            <h3>English Translation</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Portuguese</th>
+                        <th>English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Santo Antônio eu quero água</td>
+                        <td>Saint Anthony, I want water</td>
+                    </tr>
+                    <tr>
+                        <td>Quero água pra beber</td>
+                        <td>I want water to drink</td>
+                    </tr>
+                    <tr>
+                        <td>Quero água pra lavar</td>
+                        <td>I want water to wash</td>
+                    </tr>
+                    <tr>
+                        <td>Quero água pra benzer</td>
+                        <td>I want water to bless</td>
+                    </tr>
+                    <tr>
+                        <td>Eu quero água</td>
+                        <td>I want water</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pronunciation -->
+        <div class="section">
+            <h2>🔊 Pronunciation</h2>
+            <div class="pronunciation">
+                <div class="pronunciation-text">Santo Antônio eu quero água</div>
+                <div class="pronunciation-guide">SAHN-too ahn-TOH-nyoo EH-oo KEH-roo AH-gwah</div>
+            </div>
+            <div class="pronunciation">
+                <div class="pronunciation-text">Quero água pra beber</div>
+                <div class="pronunciation-guide">KEH-roo AH-gwah prah beh-BEHR</div>
+            </div>
+            <div class="pronunciation">
+                <div class="pronunciation-text">Quero água pra lavar</div>
+                <div class="pronunciation-guide">KEH-roo AH-gwah prah lah-VAHR</div>
+            </div>
+            <div class="pronunciation">
+                <div class="pronunciation-text">Quero água pra benzer</div>
+                <div class="pronunciation-guide">KEH-roo AH-gwah prah behn-ZEHR</div>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.95em; color: #666;"><strong>Tip:</strong> The "ã" is nasalized — say it slightly through your nose. The "água" sounds like "AH-gwah" with a nasal "ah".</p>
+        </div>
+
+        <!-- Vocabulary -->
+        <div class="section">
+            <h2>📚 Vocabulary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Word</th>
+                        <th>Meaning</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Santo</strong></td>
+                        <td>Saint</td>
+                        <td>Masculine noun/adjective; used before saint names</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Antônio</strong></td>
+                        <td>Anthony</td>
+                        <td>Portuguese form of Anthony; refers to Saint Anthony of Padua</td>
+                    </tr>
+                    <tr>
+                        <td><strong>eu</strong></td>
+                        <td>I</td>
+                        <td>First person singular pronoun</td>
+                    </tr>
+                    <tr>
+                        <td><strong>quero</strong></td>
+                        <td>I want</td>
+                        <td>Present tense of querer (to want)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>água</strong></td>
+                        <td>water</td>
+                        <td>Feminine noun; central to both physical and spiritual meaning</td>
+                    </tr>
+                    <tr>
+                        <td><strong>pra</strong></td>
+                        <td>for / to</td>
+                        <td>Contracted form of para; indicates purpose before infinitive</td>
+                    </tr>
+                    <tr>
+                        <td><strong>beber</strong></td>
+                        <td>to drink</td>
+                        <td>Infinitive; means to drink liquids</td>
+                    </tr>
+                    <tr>
+                        <td><strong>lavar</strong></td>
+                        <td>to wash</td>
+                        <td>Infinitive; means physical washing/cleansing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>benzer</strong></td>
+                        <td>to bless</td>
+                        <td>Infinitive; means to make holy, especially with holy water</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Grammar -->
+        <div class="section">
+            <h2>📖 Grammar</h2>
+
+            <h3>Verb Forms</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Form</th>
+                        <th>Base Verb</th>
+                        <th>Tense</th>
+                        <th>Meaning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>quero</td>
+                        <td>querer</td>
+                        <td>Present indicative</td>
+                        <td>I want</td>
+                    </tr>
+                    <tr>
+                        <td>beber</td>
+                        <td>beber</td>
+                        <td>Infinitive</td>
+                        <td>to drink</td>
+                    </tr>
+                    <tr>
+                        <td>lavar</td>
+                        <td>lavar</td>
+                        <td>Infinitive</td>
+                        <td>to wash</td>
+                    </tr>
+                    <tr>
+                        <td>benzer</td>
+                        <td>benzer</td>
+                        <td>Infinitive</td>
+                        <td>to bless</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Sentence Patterns</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Explanation</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Eu quero [noun]</strong></td>
+                        <td>Subject + verb + object: "I want [something]"</td>
+                        <td>Eu quero água</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quero [noun] pra [infinitive]</strong></td>
+                        <td>"I want [something] to [do something]" — pra + infinitive for purpose</td>
+                        <td>Quero água pra beber</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Three-part escalation</strong></td>
+                        <td>Physical → Cleanliness → Spiritual need (body → purification → soul)</td>
+                        <td>pra beber / pra lavar / pra benzer</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Key Grammar Notes</h3>
+            <ul style="margin-left: 20px; line-height: 1.8; margin-top: 15px;">
+                <li><strong>Subject pronoun "eu":</strong> In "Eu quero água" (opening), "eu" is explicitly stated for emphasis. In "Quero água pra beber", the subject is omitted because the verb ending "-o" already signals "I".</li>
+                <li><strong>Purpose with "pra":</strong> "Pra" (short for "para") before an infinitive always means "in order to" — the purpose of wanting water.</li>
+                <li><strong>Infinitives:</strong> The verbs "beber," "lavar," "benzer" are in infinitive form. They describe the action wanted, not a conjugated form.</li>
+            </ul>
+        </div>
+
+        <!-- Cultural Context -->
+        <div class="section">
+            <h2>🌍 Cultural Context</h2>
+            <div class="cultural-note">
+                <p><strong>Santo Antônio (Saint Anthony of Padua):</strong> The patron saint of Brazil, one of the most beloved Catholic figures in Brazilian culture. He is invoked for miracles, finding lost objects, and protection. Festivals in his honor are celebrated June 13 across Brazil, especially in the Northeast.</p>
+                <p><strong>Water in Afro-Brazilian Spirituality:</strong> Water carries profound spiritual meaning. In Candomblé (the Afro-Brazilian religion that shaped capoeira), water is associated with Oxum (goddess of fresh water and fertility) and Iemanjá (goddess of the sea). Asking for water is never purely physical.</p>
+                <p><strong>Benzer (to Bless):</strong> Refers to blessing water to make it "água benta" (holy water), used in both Catholic rituals and Afro-Brazilian healing. A "benzedeira" (female folk healer) blesses water, herbs, and people to cure illness.</p>
+                <p><strong>The Three Uses of Water:</strong> Beber (drink), lavar (wash), benzer (bless) represent a complete spiritual and physical cycle: sustaining the body, purifying it, and consecrating it.</p>
+                <p><strong>June Festivals:</strong> This song is often sung during "Festa Junina" (June Festivals) in Brazil when Santo Antônio is celebrated. Capoeira groups incorporate thematically relevant songs during this period.</p>
+            </div>
+        </div>
+
+        <!-- Practice -->
+        <div class="section">
+            <div class="practice-box">
+                <h4>✏️ Practice Exercises</h4>
+                <ol>
+                    <li><strong>Write 2 new sentences using song vocabulary:</strong>
+                        <ul style="margin-top: 5px;">
+                            <li>Eu quero tempo pra descansar e pra aprender.</li>
+                            <li>Santo Antônio, eu quero paz pra viver.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Reuse 1 sentence structure:</strong> Song pattern: "Quero água pra beber / pra lavar / pra benzer" → New: "Quero música pra dançar, pra cantar, pra sentir" (I want music to dance, sing, feel)</li>
+                    <li><strong>Identify verb form:</strong> What is "benzer"? Explain its meaning and grammatical role in "pra benzer"</li>
+                    <li><strong>Recite and practice:</strong> Speak the invocation slowly: "SAHN-too ahn-TOH-nyoo EH-oo KEH-roo AH-gwah"</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="index.html" class="btn btn-back">← Back to Home</a>
+            <a href="#" class="btn btn-quiz">Take Quiz →</a>
+        </div>
+    </div>
+</body>
+</html>

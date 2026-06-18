@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iê Maré — Pronunciation (Google TTS)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f4f0;
+      color: #1a1a1a;
+      padding: 2rem 1rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 1.4rem; font-weight: 500; margin-bottom: 0.25rem; }
+    .subtitle { font-size: 0.875rem; color: #666; margin-bottom: 1rem; }
+    .notice {
+      background: #e8f5e9;
+      border: 1px solid #81c784;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: #2e5e30;
+      margin-bottom: 1.5rem;
+    }
+    .notice strong { font-weight: 500; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #999;
+      margin-bottom: 0.75rem;
+      margin-top: 1.75rem;
+    }
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e0deda;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .card .pt { font-size: 1.1rem; font-weight: 500; }
+    .card .en { font-size: 0.78rem; color: #888; }
+    .card .hint { font-size: 0.72rem; color: #aaa; font-style: italic; }
+    .card button {
+      margin-top: 8px;
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      border: 1px solid #d0ceca;
+      border-radius: 6px;
+      background: #f5f4f0;
+      cursor: pointer;
+      width: fit-content;
+    }
+    .card button:hover { background: #ebe9e4; }
+    .card button:disabled { opacity: 0.5; cursor: default; }
+    .lyrics-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .lyric-row {
+      background: #fff;
+      border: 1px solid #e0deda;
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .lyric-row .pt { font-size: 1rem; font-weight: 500; flex: 1; }
+    .lyric-row .en { font-size: 0.8rem; color: #888; flex: 1; }
+    .lyric-row button {
+      padding: 4px 12px;
+      font-size: 0.78rem;
+      border: 1px solid #d0ceca;
+      border-radius: 6px;
+      background: #f5f4f0;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .lyric-row button:hover { background: #ebe9e4; }
+    .lyric-row button:disabled { opacity: 0.5; cursor: default; }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      background: #fff;
+      border: 1px solid #e0deda;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .controls label { font-size: 0.82rem; color: #666; }
+    .controls input[type=range] { width: 100px; }
+    .controls span { font-size: 0.82rem; color: #444; min-width: 30px; }
+    .custom-row {
+      background: #fff;
+      border: 1px solid #e0deda;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 2rem;
+    }
+    .custom-row label { font-size: 0.82rem; color: #666; display: block; margin-bottom: 6px; }
+    .custom-row .row { display: flex; gap: 8px; }
+    .custom-row input[type=text] {
+      flex: 1;
+      padding: 6px 10px;
+      font-size: 0.95rem;
+      border: 1px solid #d0ceca;
+      border-radius: 6px;
+      background: #fafaf8;
+    }
+    .custom-row button {
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      border: 1px solid #d0ceca;
+      border-radius: 6px;
+      background: #f5f4f0;
+      cursor: pointer;
+    }
+    .custom-row button:hover { background: #ebe9e4; }
+    .warn {
+      display: none;
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.83rem;
+      color: #856404;
+      margin-bottom: 1rem;
+    }
+    footer {
+      font-size: 0.75rem;
+      color: #bbb;
+      text-align: center;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Iê Maré — Pronunciation Player</h1>
+<p class="subtitle">Google Translate TTS · requires internet · no install · no API key</p>
+
+<div class="notice">
+  <strong>How this works:</strong> Uses the same audio engine as Google Translate — genuine Brazilian Portuguese pronunciation, streamed on demand. Requires an internet connection. No account or API key needed.
+</div>
+
+<div id="warn" class="warn">
+  Audio blocked — your browser may be preventing autoplay or the request was rate-limited. Try clicking the button again.
+</div>
+
+<div class="controls">
+  <label>Speed</label>
+  <input type="range" id="rate" min="0.5" max="1" step="0.1" value="0.8"
+         oninput="document.getElementById('rate-val').textContent = this.value == '1' ? 'normal' : 'slow'" />
+  <span id="rate-val">slow</span>
+</div>
+
+<p class="section-label">Vocabulary</p>
+<div class="word-grid" id="word-grid"></div>
+
+<p class="section-label">Song lines</p>
+<div class="lyrics-grid" id="lyrics-grid"></div>
+
+<p class="section-label">Custom</p>
+<div class="custom-row">
+  <label>Type any word or phrase in Portuguese</label>
+  <div class="row">
+    <input type="text" id="custom" placeholder="e.g. ela te chama" />
+    <button id="custom-btn" onclick="speakCustom()">▶ Play</button>
+  </div>
+</div>
+
+<footer>Iê Maré · Capoeira Portuguese Learning · Google Translate TTS (unofficial, free)</footer>
+
+<script>
+const words = [
+  { pt: 'iê', en: 'hey (capoeira shout)', hint: 'ee-EH' },
+  { pt: 'maré', en: 'tide', hint: 'mah-REH' },
+  { pt: 'beira', en: 'shore / edge', hint: 'BAY-rah' },
+  { pt: 'mar', en: 'sea', hint: 'mah' },
+  { pt: 'cheia', en: 'full / high', hint: 'SHAY-ah' },
+  { pt: 'vazando', en: 'ebbing / going out', hint: 'vah-ZAN-doo' },
+  { pt: 'barquinho', en: 'little boat', hint: 'bar-KEEN-yoo' },
+  { pt: 'sozinho', en: 'alone', hint: 'so-ZEEN-yoo' },
+  { pt: 'rolando', en: 'rolling', hint: 'hoh-LAN-doo' },
+  { pt: 'subiu', en: 'rose / went up', hint: 'soo-bee-OO' },
+  { pt: 'desceu', en: 'fell / went down', hint: 'deh-SAY-oo' },
+  { pt: 'ela te quer', en: 'she wants you', hint: 'EH-lah chee KEHR' },
+];
+
+const lyrics = [
+  { pt: 'Iê!', en: 'Hey! (capoeira shout)' },
+  { pt: 'Ee maré, ee da beira mar', en: 'Hey tide, hey from the shore' },
+  { pt: 'Oi de maré, maré', en: 'Oh the tide, the tide' },
+  { pt: 'Maré subiu, maré desceu', en: 'The tide rose, the tide fell' },
+  { pt: 'Ela te chama, ela te quer', en: 'She calls you, she wants you' },
+  { pt: 'A maré tá cheia', en: 'The tide is full / high' },
+  { pt: 'A maré tá vazando', en: 'The tide is ebbing' },
+  { pt: 'Meu barquinho tá sozinho', en: 'My little boat is alone' },
+  { pt: 'No meio do mar rolando', en: 'Rolling in the middle of the sea' },
+];
+
+let currentAudio = null;
+
+function ttsUrl(text, slow) {
+  const encoded = encodeURIComponent(text);
+  const speed = slow ? '0.24' : '1';
+  return `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=pt-BR&ttsspeed=${speed}&client=tw-ob`;
+}
+
+function speak(text, btn) {
+  if (!text.trim()) return;
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+
+  const slow = parseFloat(document.getElementById('rate').value) < 1;
+  const audio = new Audio(ttsUrl(text, slow));
+  currentAudio = audio;
+
+  const warn = document.getElementById('warn');
+  const orig = btn ? btn.textContent : null;
+
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = '♪ Playing…';
+  }
+
+  audio.play().then(() => {
+    warn.style.display = 'none';
+  }).catch(() => {
+    warn.style.display = 'block';
+    if (btn) { btn.disabled = false; btn.textContent = orig; }
+  });
+
+  audio.onended = () => {
+    if (btn) { btn.disabled = false; btn.textContent = orig; }
+    currentAudio = null;
+  };
+  audio.onerror = () => {
+    warn.style.display = 'block';
+    if (btn) { btn.disabled = false; btn.textContent = orig; }
+    currentAudio = null;
+  };
+}
+
+function speakCustom() {
+  speak(document.getElementById('custom').value, document.getElementById('custom-btn'));
+}
+
+document.getElementById('custom').addEventListener('keydown', e => {
+  if (e.key === 'Enter') speakCustom();
+});
+
+const wordGrid = document.getElementById('word-grid');
+words.forEach(w => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <span class="pt">${w.pt}</span>
+    <span class="en">${w.en}</span>
+    <span class="hint">${w.hint}</span>
+    <button>▶ Hear it</button>
+  `;
+  card.querySelector('button').addEventListener('click', function() { speak(w.pt, this); });
+  wordGrid.appendChild(card);
+});
+
+const lyricsGrid = document.getElementById('lyrics-grid');
+lyrics.forEach(l => {
+  const row = document.createElement('div');
+  row.className = 'lyric-row';
+  row.innerHTML = `
+    <span class="pt">${l.pt}</span>
+    <span class="en">${l.en}</span>
+    <button>▶ Play</button>
+  `;
+  row.querySelector('button').addEventListener('click', function() { speak(l.pt, this); });
+  lyricsGrid.appendChild(row);
+});
+</script>
+</body>
+</html>
