@@ -84,18 +84,31 @@
         }
         .blank {
             display: inline-block;
-            background: #009c3b;
-            color: #009c3b;
-            border-radius: 4px;
-            min-width: 80px;
-            padding: 0 8px;
+            background: transparent;
+            color: transparent;
+            border-bottom: 3px solid #009c3b;
+            border-radius: 0;
+            min-width: 90px;
+            padding: 0 6px 2px;
             margin: 0 4px;
             font-size: 1em;
             line-height: 1.4;
             vertical-align: middle;
-            transition: background 0.3s, color 0.3s;
+            position: relative;
+            animation: blankPulse 1.2s ease-in-out infinite;
         }
-        .blank.revealed { background: #e8f5e9; color: #009c3b; }
+        @keyframes blankPulse {
+            0%, 100% { border-bottom-color: #009c3b; }
+            50%       { border-bottom-color: #ffd700; }
+        }
+        .blank.revealed {
+            background: #fff9c4;
+            color: #009c3b;
+            border-bottom: 3px solid #009c3b;
+            border-radius: 4px;
+            animation: none;
+            font-weight: 700;
+        }
 
         .translation {
             font-size: 0.85em;
