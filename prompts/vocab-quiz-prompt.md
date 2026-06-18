@@ -5,7 +5,7 @@ This prompt generates fresh vocabulary quiz exercises based on the learner's pro
 ## Features
 - Weighted selection based on success rate
 - Fresh question formats every session
-- No pattern-tricking (unlike Duolingo)
+- No pattern-tricking
 - Immediate feedback with explanation
 
 ## TODO: Fill in comprehensive prompt

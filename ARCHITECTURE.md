@@ -7,7 +7,7 @@ An AI-powered Brazilian Portuguese learning app built around Capoeira culture (s
 
 ## Guiding Principles
 - No manual tracking — all progress is handled by the app
-- AI generates fresh exercises every session (no pattern-tricking like Duolingo)
+- AI generates fresh exercises every session (no pattern-tricking)
 - Content-first: song MD files are the source of truth in v1
 - Clean separation between content, logic, and UI from the start
 - Beginner-friendly: assume zero prior Portuguese knowledge
@@ -247,4 +247,4 @@ Human-readable, easy to author with Perplexity, version-controllable with git. S
 Fastest path to a usable learning tool. No build pipeline, no deployment — just open in a browser and learn.
 
 **Why Claude API (not hardcoded exercises)?**
-Prevents the Duolingo trap: fresh exercise variations every session mean the learner must actually know the material, not just recognise patterns.
+Fresh exercise variations every session mean the learner must actually know the material, not just recognise patterns.
