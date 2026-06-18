@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Quiz · Capoeira Portuguese</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #009c3b 0%, #ffd700 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .back-link {
+            color: #009c3b;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            border: 2px solid #ffd700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .back-link:hover { background: #ffd700; color: #009c3b; }
+        h1 { color: #009c3b; font-size: 1.6em; flex: 1; }
+
+        .score-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin-bottom: 28px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .score-val { font-weight: 700; color: #009c3b; font-size: 1.1em; }
+
+        /* Song label */
+        .song-label {
+            font-size: 0.78em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        /* The lyric line display */
+        .lyric-card {
+            background: #fffbea;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 22px 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .lyric-line {
+            font-size: 1.35em;
+            font-weight: 600;
+            color: #222;
+            line-height: 1.5;
+            letter-spacing: 0.01em;
+        }
+        .blank {
+            display: inline-block;
+            background: #009c3b;
+            color: #009c3b;
+            border-radius: 4px;
+            min-width: 80px;
+            padding: 0 8px;
+            margin: 0 4px;
+            font-size: 1em;
+            line-height: 1.4;
+            vertical-align: middle;
+            transition: background 0.3s, color 0.3s;
+        }
+        .blank.revealed { background: #e8f5e9; color: #009c3b; }
+
+        .translation {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Options */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 20px 0 24px;
+        }
+        .option-btn {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 14px 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.18s;
+            color: #333;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: #009c3b;
+            background: #f0fff4;
+            color: #009c3b;
+        }
+        .option-btn.correct {
+            background: #e8f5e9;
+            border-color: #009c3b;
+            color: #009c3b;
+        }
+        .option-btn.wrong {
+            background: #ffebee;
+            border-color: #c62828;
+            color: #c62828;
+        }
+        .option-btn:disabled { cursor: default; }
+
+        /* Feedback */
+        .feedback {
+            display: none;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .feedback.correct { display: block; background: #e8f5e9; border-left: 4px solid #009c3b; color: #1b5e20; }
+        .feedback.wrong   { display: block; background: #ffebee; border-left: 4px solid #c62828; color: #b71c1c; }
+        .feedback strong  { font-size: 1.05em; }
+
+        .next-btn {
+            display: none;
+            width: 100%;
+            background: #009c3b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .next-btn:hover { background: #007a2f; }
+        .next-btn.visible { display: block; }
+
+        /* Results screen */
+        .results {
+            display: none;
+            text-align: center;
+        }
+        .results.visible { display: block; }
+        .results-emoji { font-size: 3em; margin-bottom: 12px; }
+        .results h2 { color: #009c3b; font-size: 1.8em; margin-bottom: 8px; }
+        .results p { color: #555; margin-bottom: 24px; font-size: 1.05em; }
+        .results-score { font-size: 2.5em; font-weight: 700; color: #009c3b; margin: 12px 0; }
+        .restart-btn {
+            background: #ffd700;
+            color: #009c3b;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 32px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .restart-btn:hover { background: #f0c800; }
+
+        .quiz-area { }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="index.html" class="back-link">← Home</a>
+        <h1>🎵 Song Quiz</h1>
+    </div>
+
+    <div class="score-bar">
+        <span>Question <span id="q-num">1</span> of <span id="q-total">10</span></span>
+        <span>Score: <span class="score-val" id="score-display">0</span></span>
+    </div>
+
+    <div class="quiz-area" id="quiz-area">
+        <div class="song-label" id="song-label"></div>
+
+        <div class="lyric-card">
+            <div class="lyric-line" id="lyric-line"></div>
+            <div class="translation" id="lyric-translation"></div>
+        </div>
+
+        <div class="options-grid" id="options-grid"></div>
+
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="next-btn">Next →</button>
+    </div>
+
+    <div class="results" id="results">
+        <div class="results-emoji" id="results-emoji"></div>
+        <h2>Quiz Complete!</h2>
+        <div class="results-score" id="results-score"></div>
+        <p id="results-msg"></p>
+        <button class="restart-btn" onclick="startQuiz()">Play Again</button>
+    </div>
+</div>
+
+<script>
+// ─── Song data ───────────────────────────────────────────────────────────────
+// Each entry: { song, line, translation }
+// Lines are cleaned and only non-trivial ones are included (no pure onomatopoeia / pure repeats)
+
+const ALL_LINES = [
+    // Ai, Ai, Aidê
+    { song: "Ai, Ai, Aidê",         line: "Joga bonito que eu quero ver",              translation: "Play beautifully because I want to see" },
+    { song: "Ai, Ai, Aidê",         line: "Joga uma coisa que eu quero aprender",       translation: "Play something that I want to learn" },
+    { song: "Ai, Ai, Aidê",         line: "Joga menino que eu quero aprender",          translation: "Play, boy, because I want to learn" },
+    { song: "Ai, Ai, Aidê",         line: "Joga pra mim que eu jogo pra você",          translation: "Play for me and I'll play for you" },
+    { song: "Ai, Ai, Aidê",         line: "Joga bonito que o bom é você",               translation: "Play beautifully because you are the skilled one" },
+    { song: "Ai, Ai, Aidê",         line: "Joga certinho pra mim aprender",             translation: "Play correctly so I can learn" },
+    { song: "Ai, Ai, Aidê",         line: "Joga pra lá que eu não quero apanhar",       translation: "Play over there because I don't want to get hit" },
+    { song: "Ai, Ai, Aidê",         line: "Joga capoeira é bonito pra ver",             translation: "Playing capoeira is beautiful to watch" },
+    { song: "Ai, Ai, Aidê",         line: "Capoeira é malícia, é mandinga, é prazer",   translation: "Capoeira is cunning, it is magic, it is pleasure" },
+    { song: "Ai, Ai, Aidê",         line: "Como vai, como passou, como vai vosmicê?",   translation: "How's it going, what happened, how are you?" },
+    { song: "Ai, Ai, Aidê",         line: "Eu venci a batalha de Camugerê",             translation: "I won the battle of Camugerê" },
+    { song: "Ai, Ai, Aidê",         line: "Aidê, Aidê, cadê você?",                    translation: "Aidê, Aidê, where are you?" },
+    { song: "Ai, Ai, Aidê",         line: "Ô era eu, era você",                         translation: "Oh, it was me, it was you" },
+    { song: "Ai, Ai, Aidê",         line: "Ô era eu, era meu mano",                     translation: "Oh, it was me, it was my brother" },
+
+    // Iê Maré
+    { song: "Iê Maré",              line: "Ee mare, ee da beira mar",                   translation: "Ee maré, ee from the edge of the sea" },
+    { song: "Iê Maré",              line: "Mare subiu, mare desceu",                    translation: "The tide rose, the tide fell" },
+    { song: "Iê Maré",              line: "Mare da beira mar",                          translation: "Tide from the edge of the sea" },
+    { song: "Iê Maré",              line: "Ela te chama, ela te quer",                  translation: "She calls you, she wants you" },
+    { song: "Iê Maré",              line: "A mare ta cheia",                            translation: "The tide is full / high" },
+    { song: "Iê Maré",              line: "A mare ta vazando",                          translation: "The tide is ebbing / draining" },
+    { song: "Iê Maré",              line: "Meu barquinho ta sozinho",                   translation: "My little boat is alone" },
+    { song: "Iê Maré",              line: "No meio do mar rolando",                     translation: "Rolling in the middle of the sea" },
+
+    // Vou Mandar Lecô Cajueiro
+    { song: "Vou Mandar Lecô Cajueiro", line: "Vou mandar lecô cajueiro",               translation: "I'm going to send the call of the cajueiro" },
+    { song: "Vou Mandar Lecô Cajueiro", line: "Vou mandar loiá",                        translation: "I'm going to send the reply of loiá" },
+    { song: "Vou Mandar Lecô Cajueiro", line: "Vou mandar lecô cajuê",                  translation: "I'm going to send the call, cajuê" },
+    { song: "Vou Mandar Lecô Cajueiro", line: "Vou mandar loiá cajuê",                  translation: "I'm going to send the reply, cajuê" },
+
+    // Santo Antônio
+    { song: "Santo Antônio Eu Quero Água", line: "Santo Antônio eu quero água",         translation: "Saint Anthony, I want water" },
+    { song: "Santo Antônio Eu Quero Água", line: "Quero água pra beber",                translation: "I want water to drink" },
+    { song: "Santo Antônio Eu Quero Água", line: "Quero água pra lavar",                translation: "I want water to wash" },
+    { song: "Santo Antônio Eu Quero Água", line: "Quero água pra benzer",               translation: "I want water to bless" },
+    { song: "Santo Antônio Eu Quero Água", line: "Eu quero água",                       translation: "I want water" },
+
+    // Zum Zum Zum
+    { song: "Zum Zum Zum",          line: "Zum, zum, zum, capoeira mata um",            translation: "Buzz, buzz, buzz, capoeira kills one" },
+    { song: "Zum Zum Zum",          line: "Onde tem marimbondo",                        translation: "Where there is a wasp" },
+    { song: "Zum Zum Zum",          line: "Quero ver bater, quero ver cair",            translation: "I want to see it strike, I want to see it fall" },
+    { song: "Zum Zum Zum",          line: "Meu apito já tocou",                         translation: "My whistle already blew" },
+    { song: "Zum Zum Zum",          line: "Você não quer ouvir",                        translation: "You don't want to listen" },
+    { song: "Zum Zum Zum",          line: "Capoeira é uma brincadeira",                 translation: "Capoeira is a game / playful art" },
+];
+
+// All individual words from all lines (for distractors)
+function allWords() {
+    const words = new Set();
+    for (const entry of ALL_LINES) {
+        tokenize(entry.line).forEach(w => words.add(w));
+    }
+    return [...words];
+}
+
+// Tokenize a line into words (strip punctuation, keep case)
+function tokenize(line) {
+    return line.split(/[\s,!?]+/).filter(w => w.length > 0);
+}
+
+// Pick a random element
+function pick(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+// Shuffle array
+function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+// ─── Quiz state ───────────────────────────────────────────────────────────────
+const TOTAL = 10;
+let questions = [];
+let current = 0;
+let score = 0;
+let answered = false;
+
+function buildQuestion(entry) {
+    const words = tokenize(entry.line);
+    // Prefer content words (length > 2) for blanking; fallback to any word
+    const candidates = words.filter(w => w.length > 2);
+    const targetWord = pick(candidates.length ? candidates : words);
+
+    // Find all words in the corpus that are not the target, for distractors
+    const pool = allWords().filter(w => w.toLowerCase() !== targetWord.toLowerCase() && w.length > 1);
+    const distractors = shuffle(pool).slice(0, 3);
+
+    const options = shuffle([targetWord, ...distractors]);
+
+    // Build display line: replace first occurrence of target word (case-insensitive)
+    const regex = new RegExp(`(?<![\\w])${escapeRegex(targetWord)}(?![\\w])`, 'i');
+    const displayLine = entry.line.replace(regex, `___`);
+
+    return { entry, targetWord, options, displayLine };
+}
+
+function escapeRegex(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function generateQuestions() {
+    // Pick TOTAL unique lines (shuffle all, take first TOTAL)
+    const pool = shuffle(ALL_LINES).slice(0, TOTAL);
+    return pool.map(buildQuestion);
+}
+
+// ─── Render ───────────────────────────────────────────────────────────────────
+function renderQuestion() {
+    const q = questions[current];
+    answered = false;
+
+    document.getElementById('q-num').textContent = current + 1;
+    document.getElementById('q-total').textContent = TOTAL;
+    document.getElementById('score-display').textContent = score;
+    document.getElementById('song-label').textContent = `🎵 ${q.entry.song}`;
+
+    // Lyric line with styled blank
+    const blankHtml = `<span class="blank" id="blank-span">${q.targetWord.replace(/./g, ' ')}</span>`;
+    document.getElementById('lyric-line').innerHTML = q.displayLine.replace('___', blankHtml);
+    document.getElementById('lyric-translation').textContent = '';
+
+    // Options
+    const grid = document.getElementById('options-grid');
+    grid.innerHTML = '';
+    q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = opt;
+        btn.onclick = () => handleAnswer(opt, btn);
+        grid.appendChild(btn);
+    });
+
+    // Reset feedback
+    const fb = document.getElementById('feedback');
+    fb.className = 'feedback';
+    fb.innerHTML = '';
+
+    document.getElementById('next-btn').classList.remove('visible');
+}
+
+function handleAnswer(chosen, btn) {
+    if (answered) return;
+    answered = true;
+
+    const q = questions[current];
+    const correct = chosen.toLowerCase() === q.targetWord.toLowerCase();
+
+    // Disable all buttons, highlight
+    document.querySelectorAll('.option-btn').forEach(b => {
+        b.disabled = true;
+        if (b.textContent.toLowerCase() === q.targetWord.toLowerCase()) {
+            b.classList.add('correct');
+        }
+    });
+    if (!correct) btn.classList.add('wrong');
+
+    // Reveal blank
+    const blankEl = document.getElementById('blank-span');
+    if (blankEl) {
+        blankEl.textContent = q.targetWord;
+        blankEl.classList.add('revealed');
+    }
+
+    // Show translation
+    document.getElementById('lyric-translation').textContent = `"${q.entry.translation}"`;
+
+    // Feedback
+    const fb = document.getElementById('feedback');
+    if (correct) {
+        score++;
+        document.getElementById('score-display').textContent = score;
+        fb.className = 'feedback correct';
+        fb.innerHTML = `<strong>✅ Correct!</strong> <em>${q.targetWord}</em> — ${q.entry.translation}`;
+    } else {
+        fb.className = 'feedback wrong';
+        fb.innerHTML = `<strong>❌ Not quite.</strong> The missing word was <em>${q.targetWord}</em>.<br>Full line: <em>"${q.entry.line}"</em> — ${q.entry.translation}`;
+    }
+
+    document.getElementById('next-btn').classList.add('visible');
+}
+
+function nextQuestion() {
+    current++;
+    if (current >= TOTAL) {
+        showResults();
+    } else {
+        renderQuestion();
+    }
+}
+
+function showResults() {
+    document.getElementById('quiz-area').style.display = 'none';
+    const results = document.getElementById('results');
+    results.classList.add('visible');
+
+    const pct = score / TOTAL;
+    let emoji, msg;
+    if (pct === 1)       { emoji = '🏆'; msg = 'Perfect score — Mestre level! Axé!'; }
+    else if (pct >= 0.8) { emoji = '🌟'; msg = 'Excellent! You know these songs well.'; }
+    else if (pct >= 0.6) { emoji = '💪'; msg = 'Good effort! Keep singing along.'; }
+    else if (pct >= 0.4) { emoji = '🎵'; msg = 'Keep practicing — the roda awaits!'; }
+    else                  { emoji = '🥋'; msg = 'Every mestre started at zero. Try again!'; }
+
+    document.getElementById('results-emoji').textContent = emoji;
+    document.getElementById('results-score').textContent = `${score} / ${TOTAL}`;
+    document.getElementById('results-msg').textContent = msg;
+}
+
+function startQuiz() {
+    questions = generateQuestions();
+    current = 0;
+    score = 0;
+    answered = false;
+    document.getElementById('quiz-area').style.display = '';
+    document.getElementById('results').classList.remove('visible');
+    renderQuestion();
+}
+
+// Wire up next button
+document.getElementById('next-btn').addEventListener('click', nextQuestion);
+
+// Start
+startQuiz();
+</script>
+</body>
+</html>
