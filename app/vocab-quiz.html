@@ -299,7 +299,7 @@
             <div class="question-meta">What does this word mean? <span class="mode-tag visual">read</span></div>
             <div class="question-word" id="q-word"></div>
             <div class="question-hint" id="q-hint"></div>
-            <button class="replay-btn" id="replay-btn" onclick="pronounce()">🔊 Hear it again</button>
+            <button class="replay-btn" id="replay-btn" onclick="pronounce()">🔊 Hear it</button>
         </div>
 
         <!-- Blind question card (word hidden) -->
@@ -307,7 +307,7 @@
             <div class="question-meta">What does this word mean? <span class="mode-tag blind">listen</span></div>
             <div class="blind-icon">🎧</div>
             <div class="blind-label">Listen carefully — the word is not shown</div>
-            <button class="replay-btn" id="blind-replay-btn" onclick="pronounce()">🔊 Play again</button>
+            <button class="replay-btn" id="blind-replay-btn" onclick="pronounce()">🔊 Play</button>
         </div>
 
         <div class="options" id="options"></div>
@@ -352,7 +352,7 @@ function pronounce() {
     if (!text || typeof speechSynthesis === 'undefined') return;
     speechSynthesis.cancel();
     const btnId = isBlind ? 'blind-replay-btn' : 'replay-btn';
-    const origLabel = isBlind ? '🔊 Play again' : '🔊 Hear it again';
+    const origLabel = isBlind ? '🔊 Play' : '🔊 Hear it';
     const btn = document.getElementById(btnId);
     const utt = new SpeechSynthesisUtterance(text);
     utt.lang = 'pt-BR';
@@ -431,7 +431,7 @@ function renderQuestion() {
         visualCard.style.display = 'none';
         blindCard.style.display  = 'block';
         const br = document.getElementById('blind-replay-btn');
-        br.disabled = false; br.textContent = '🔊 Play again';
+        br.disabled = false; br.textContent = '🔊 Play';
     } else {
         blindCard.style.display  = 'none';
         visualCard.style.display = 'block';
@@ -440,7 +440,7 @@ function renderQuestion() {
         const songNames = sources.map(s => s.replace(/^song-/, '').replace(/-/g, ' ')).join(', ');
         document.getElementById('q-hint').textContent = 'from: ' + songNames;
         const rr = document.getElementById('replay-btn');
-        rr.disabled = false; rr.textContent = '🔊 Hear it again';
+        rr.disabled = false; rr.textContent = '🔊 Hear it';
     }
 
     const opts = buildOptions(entry);
