@@ -430,6 +430,8 @@ function renderQuestion() {
     if (isBlind) {
         visualCard.style.display = 'none';
         blindCard.style.display  = 'block';
+        const blindLabel = document.querySelector('.blind-card .blind-label');
+        if (blindLabel) blindLabel.innerHTML = 'Listen carefully — the word is not shown';
         const br = document.getElementById('blind-replay-btn');
         br.disabled = false; br.textContent = '🔊 Play';
     } else {
@@ -488,6 +490,11 @@ function selectAnswer(btn, chosen, correctEntry) {
 
     document.getElementById('stat-correct').textContent = correct;
     document.getElementById('stat-wrong').textContent = wrong;
+
+    if (isBlind) {
+        const blindLabel = document.querySelector('.blind-card .blind-label');
+        if (blindLabel) blindLabel.innerHTML = 'The word was: <strong style="font-size:1.3em;color:#fff;">' + correctEntry.word + '</strong>';
+    }
 
     const fb = document.getElementById('feedback');
     const wordSpan = '<em>' + correctEntry.word + '</em>';
