@@ -331,29 +331,38 @@
 
 </div>
 <script>
-let currentAudio = null;
+let ptVoice = null;
 
-function ttsUrl(text) {
-    return 'https://translate.google.com/translate_tts?ie=UTF-8&q=' + encodeURIComponent(text) + '&tl=pt-BR&ttsspeed=0.4&client=tw-ob';
+function initVoice() {
+    const voices = speechSynthesis.getVoices();
+    ptVoice = voices.find(v => v.name.includes('Google') && v.lang.startsWith('pt'))
+           || voices.find(v => v.lang === 'pt-BR')
+           || voices.find(v => v.lang.startsWith('pt'))
+           || null;
+}
+if (typeof speechSynthesis !== 'undefined') {
+    speechSynthesis.onvoiceschanged = initVoice;
+    initVoice();
 }
 
 let currentWord = '';
 
 function pronounce() {
     const text = currentWord;
-    if (!text) return;
-    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+    if (!text || typeof speechSynthesis === 'undefined') return;
+    speechSynthesis.cancel();
     const btnId = isBlind ? 'blind-replay-btn' : 'replay-btn';
     const origLabel = isBlind ? '🔊 Play again' : '🔊 Hear it again';
     const btn = document.getElementById(btnId);
-    const audio = new Audio(ttsUrl(text));
-    currentAudio = audio;
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'pt-BR';
+    utt.rate = 0.8;
+    if (ptVoice) utt.voice = ptVoice;
     if (btn) { btn.disabled = true; btn.textContent = '♪ Playing…'; }
-    audio.play().catch(() => {});
-    audio.onended = audio.onerror = () => {
-        currentAudio = null;
+    utt.onend = utt.onerror = () => {
         if (btn) { btn.disabled = false; btn.textContent = origLabel; }
     };
+    speechSynthesis.speak(utt);
 }
 
 let VOCAB = [];
