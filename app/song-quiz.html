@@ -84,30 +84,32 @@
         }
         .blank {
             display: inline-block;
-            background: transparent;
-            color: transparent;
-            border-bottom: 3px solid #009c3b;
-            border-radius: 0;
-            min-width: 90px;
-            padding: 0 6px 2px;
-            margin: 0 4px;
+            background: #ffd700;
+            color: #888;
+            border: 3px dashed #009c3b;
+            border-radius: 6px;
+            min-width: 100px;
+            padding: 2px 12px;
+            margin: 0 6px;
             font-size: 1em;
-            line-height: 1.4;
+            font-weight: 700;
+            line-height: 1.5;
             vertical-align: middle;
-            position: relative;
-            animation: blankPulse 1.2s ease-in-out infinite;
+            letter-spacing: 0.1em;
+            animation: blankPulse 1.4s ease-in-out infinite;
         }
         @keyframes blankPulse {
-            0%, 100% { border-bottom-color: #009c3b; }
-            50%       { border-bottom-color: #ffd700; }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0,156,59,0.4); }
+            50%       { box-shadow: 0 0 0 6px rgba(0,156,59,0); }
         }
         .blank.revealed {
-            background: #fff9c4;
+            background: #e8f5e9;
             color: #009c3b;
-            border-bottom: 3px solid #009c3b;
-            border-radius: 4px;
+            border: 3px solid #009c3b;
+            border-radius: 6px;
             animation: none;
             font-weight: 700;
+            letter-spacing: normal;
         }
 
         .translation {
@@ -372,7 +374,7 @@ function renderQuestion() {
     document.getElementById('song-label').textContent = `🎵 ${q.entry.song}`;
 
     // Lyric line with styled blank
-    const blankHtml = `<span class="blank" id="blank-span">${q.targetWord.replace(/./g, ' ')}</span>`;
+    const blankHtml = `<span class="blank" id="blank-span">${'?'.repeat(q.targetWord.length)}</span>`;
     document.getElementById('lyric-line').innerHTML = q.displayLine.replace('___', blankHtml);
     document.getElementById('lyric-translation').textContent = '';
 
