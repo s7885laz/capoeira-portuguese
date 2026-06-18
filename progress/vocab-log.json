@@ -340,7 +340,8 @@
     "source_type": "song",
     "source_content": [
       "song-a-mare-ta-cheia",
-      "song-zum-zum-zum_v2"
+      "song-zum-zum-zum_v2",
+      "song-manda-leco-cajueiro"
     ],
     "date_learned": null,
     "last_reviewed": null,
@@ -1670,6 +1671,96 @@
     "source_type": "song",
     "source_content": [
       "song-zum-zum-zum_v2"
+    ],
+    "date_learned": null,
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  },
+  {
+    "word": "mandar",
+    "meaning": "to send; to call out; to launch",
+    "part_of_speech": "verb (infinitive)",
+    "source_type": "song",
+    "source_content": [
+      "song-manda-leco-cajueiro"
+    ],
+    "date_learned": null,
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  },
+  {
+    "word": "lecô",
+    "meaning": "sung call / chant cue",
+    "part_of_speech": "interjection",
+    "source_type": "song",
+    "source_content": [
+      "song-manda-leco-cajueiro"
+    ],
+    "date_learned": null,
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  },
+  {
+    "word": "cajueiro",
+    "meaning": "cashew tree",
+    "part_of_speech": "noun (masculine)",
+    "source_type": "song",
+    "source_content": [
+      "song-manda-leco-cajueiro"
+    ],
+    "date_learned": null,
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  },
+  {
+    "word": "loiá",
+    "meaning": "sung reply / response",
+    "part_of_speech": "interjection",
+    "source_type": "song",
+    "source_content": [
+      "song-manda-leco-cajueiro"
+    ],
+    "date_learned": null,
+    "last_reviewed": null,
+    "quiz_stats": {
+      "times_asked": 0,
+      "times_correct": 0,
+      "times_wrong": 0,
+      "success_rate": null
+    },
+    "mastery_level": "new"
+  },
+  {
+    "word": "cajuê",
+    "meaning": "cashew / musical refrain",
+    "part_of_speech": "noun / interjection",
+    "source_type": "song",
+    "source_content": [
+      "song-manda-leco-cajueiro"
     ],
     "date_learned": null,
     "last_reviewed": null,

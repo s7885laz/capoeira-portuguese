@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manda Lecô Cajueiro - Capoeira Portuguese Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #009c3b 0%, #003da5 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #009c3b;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            color: #009c3b;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        .meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .meta-item {
+            text-align: center;
+        }
+        .meta-label {
+            color: #999;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+        .meta-value {
+            color: #009c3b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section h2 {
+            color: #009c3b;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-left: 4px solid #009c3b;
+            padding-left: 15px;
+        }
+        .section h3 {
+            color: #003da5;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th {
+            background: #009c3b;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover {
+            background: #f9f9f9;
+        }
+        .lyrics-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #003da5;
+            font-style: italic;
+            line-height: 1.8;
+            margin: 20px 0;
+            white-space: pre-wrap;
+        }
+        .cultural-note {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #009c3b;
+            margin: 20px 0;
+        }
+        .cultural-note p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        .practice-box {
+            background: #f0fff4;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+        .practice-box h4 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        .practice-box ol {
+            margin-left: 20px;
+        }
+        .practice-box li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .media-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .media-link {
+            display: inline-block;
+            background: #009c3b;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: background 0.3s;
+        }
+        .media-link:hover {
+            background: #003da5;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            justify-content: space-between;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            text-align: center;
+        }
+        .btn-back {
+            background: #6c757d;
+            color: white;
+            flex: 1;
+        }
+        .btn-back:hover {
+            background: #5a6268;
+        }
+        .btn-quiz {
+            background: #28a745;
+            color: white;
+            flex: 1;
+        }
+        .btn-quiz:hover {
+            background: #218838;
+        }
+        .difficulty {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .difficulty-1 {
+            background: #d4edda;
+            color: #155724;
+        }
+        .pronunciation-tips {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+            line-height: 1.7;
+        }
+        .refrain-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #003da5;
+            margin: 20px 0;
+        }
+        .refrain-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .refrain-box li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Manda Lecô Cajueiro</h1>
+            <p>I'm Going to Send the Call of the Cashew Tree</p>
+        </div>
+
+        <div class="meta">
+            <div class="meta-item">
+                <div class="meta-label">Type</div>
+                <div class="meta-value">Corrido</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Difficulty</div>
+                <div class="meta-value"><span class="difficulty difficulty-1">1/5</span></div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Status</div>
+                <div class="meta-value">In Study</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Added</div>
+                <div class="meta-value">June 2026</div>
+            </div>
+        </div>
+
+        <!-- Media Links -->
+        <div class="section">
+            <h2>🎵 Listen</h2>
+            <div class="media-links">
+                <a href="https://www.youtube.com/watch?v=20efGXIST84" class="media-link">▶ YouTube</a>
+                <a href="https://open.spotify.com/track/7612UejoGXblmVrktiYHB7" class="media-link">♪ Spotify</a>
+            </div>
+        </div>
+
+        <!-- Lyrics -->
+        <div class="section">
+            <h2>📝 Lyrics</h2>
+            <h3>Full Portuguese Lyrics</h3>
+            <div class="lyrics-box">Vou mandar lecô cajueiro
+Vou mandar loiá
+Vou mandar lecô cajueiro
+Vou mandar loiá
+
+Vou mandar lecô cajueiro
+Vou mandar loiá
+Vou mandar lecô cajueiro
+Vou mandar loiá
+
+Vou mandar lecô cajuê
+Vou mandar loiá cajuê
+Vou mandar lecô cajuê
+Vou mandar loiá cajuê</div>
+
+            <h3>English Translation</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Portuguese</th>
+                        <th>English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Vou mandar lecô cajueiro</strong></td>
+                        <td>I'm going to send the call of the cashew tree</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vou mandar loiá</strong></td>
+                        <td>I'm going to send the reply</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vou mandar lecô cajuê</strong></td>
+                        <td>I'm going to send the call, cajuê</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vou mandar loiá cajuê</strong></td>
+                        <td>I'm going to send the reply, cajuê</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pronunciation -->
+        <div class="section">
+            <h2>🔊 Pronunciation</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Phrase</th>
+                        <th>Pronunciation Help</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Vou mandar</strong></td>
+                        <td>voh mwan-DAR</td>
+                    </tr>
+                    <tr>
+                        <td><strong>lecô</strong></td>
+                        <td>leh-KOH</td>
+                    </tr>
+                    <tr>
+                        <td><strong>cajueiro</strong></td>
+                        <td>kah-zhoo-EH-roo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>loiá</strong></td>
+                        <td>loy-AH</td>
+                    </tr>
+                    <tr>
+                        <td><strong>cajuê</strong></td>
+                        <td>kah-zhoo-EH</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pronunciation-tips">
+                <strong>Tips:</strong><br>
+                • <em>Vou</em> sounds like "voh," not "vow."<br>
+                • The <em>j</em> in cajueiro sounds like the "s" in <em>measure</em> — a soft zh sound.<br>
+                • <em>Loiá</em> is often sung with a long, open final vowel — let it ring.<br>
+                • <em>Cajuê</em> and <em>cajueiro</em> are closely related — same root, different ending.
+            </div>
+        </div>
+
+        <!-- Vocabulary -->
+        <div class="section">
+            <h2>📚 Vocabulary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Word / Phrase</th>
+                        <th>Meaning</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>vou</strong></td>
+                        <td>I am going to</td>
+                        <td>First-person singular present of <em>ir</em> (to go); used as auxiliary for near future.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>mandar</strong></td>
+                        <td>to send; to call out; to launch</td>
+                        <td>Infinitive verb; in capoeira songs often means to sing or cue the next phrase.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>lecô</strong></td>
+                        <td>sung call / chant cue</td>
+                        <td>Traditional capoeira singing word; not standard dictionary Portuguese; musical signal for the call phrase.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>cajueiro</strong></td>
+                        <td>cashew tree</td>
+                        <td>Masculine noun (<em>o cajueiro</em>); from <em>caju</em> (cashew fruit) + <em>-eiro</em> (tree suffix).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>loiá</strong></td>
+                        <td>sung reply / response</td>
+                        <td>Traditional refrain word; musical rather than literal; signals the answering phrase in call-and-response.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>cajuê</strong></td>
+                        <td>cashew / musical refrain</td>
+                        <td>Variant singing form of cajueiro; used as rhythmic anchor and refrain marker in later verses.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vou mandar</strong></td>
+                        <td>I am going to send / sing</td>
+                        <td>Fixed phrase: <em>vou</em> (auxiliary) + <em>mandar</em> (infinitive). Core formula repeated throughout the song.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>mandar lecô</strong></td>
+                        <td>to send / launch the call</td>
+                        <td>Repeated chant formula; <em>lecô</em> signals the call half of call-and-response.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>mandar loiá</strong></td>
+                        <td>to send / launch the reply</td>
+                        <td>Repeated chant formula; <em>loiá</em> signals the response half of call-and-response.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ir</strong></td>
+                        <td>to go</td>
+                        <td>Infinitive of the irregular verb used to form near future (<em>ir</em> + infinitive).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>o cajueiro</strong></td>
+                        <td>the cashew tree</td>
+                        <td>Definite article <em>o</em> + masculine noun <em>cajueiro</em>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>o caju</strong></td>
+                        <td>the cashew fruit</td>
+                        <td>Related word; <em>caju</em> is the fruit, <em>cajueiro</em> is the tree. Same root, different suffix.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>-eiro</strong></td>
+                        <td>tree / maker suffix</td>
+                        <td>Common Portuguese suffix; e.g., caju → cajueiro, laranja → laranjeira (orange tree).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vou mandar lecô cajueiro</strong></td>
+                        <td>I'm going to send the call of the cashew tree</td>
+                        <td>Full call line; main title phrase of the song; repeated four times in the first section.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vou mandar loiá</strong></td>
+                        <td>I'm going to send the reply</td>
+                        <td>Full response line; completes the call-and-response pair.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vou mandar lecô cajuê</strong></td>
+                        <td>I'm going to send the call, cajuê</td>
+                        <td>Variant call line; <em>cajuê</em> replaces <em>cajueiro</em> as the rhythmic marker.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vou mandar loiá cajuê</strong></td>
+                        <td>I'm going to send the reply, cajuê</td>
+                        <td>Variant response line; mirrors the call variant in the final section.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>call-and-response</strong></td>
+                        <td>pergunta e resposta</td>
+                        <td>The musical structure of this song; one singer calls, the group responds. Central to the capoeira roda.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Grammar -->
+        <div class="section">
+            <h2>📖 Grammar</h2>
+
+            <h3>1. Near future with ir + infinitive</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Form in song</th>
+                        <th>Base verb</th>
+                        <th>Tense / mood</th>
+                        <th>Meaning</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>vou mandar</strong></td>
+                        <td>ir + mandar</td>
+                        <td>Near future / intention</td>
+                        <td>I'm going to send / sing</td>
+                        <td><em>Vou</em> is first-person singular present of <em>ir</em>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vou mandar lecô</strong></td>
+                        <td>ir + mandar</td>
+                        <td>Near future</td>
+                        <td>I'm going to call out lecô</td>
+                        <td>The whole phrase is one grammatical unit.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vou mandar loiá</strong></td>
+                        <td>ir + mandar</td>
+                        <td>Near future</td>
+                        <td>I'm going to sing loiá</td>
+                        <td><em>Loiá</em> is the object of <em>mandar</em> here.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2. Sentence patterns in the song</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Explanation</th>
+                        <th>Example from song</th>
+                        <th>New example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Vou + infinitive</strong></td>
+                        <td>Near future intention</td>
+                        <td><em>Vou mandar</em></td>
+                        <td><em>Vou cantar</em> (I'm going to sing)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vou mandar + [word]</strong></td>
+                        <td>Send / launch + target word</td>
+                        <td><em>Vou mandar lecô cajueiro</em></td>
+                        <td><em>Vou mandar loiá</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>[Call line] / [Response line]</strong></td>
+                        <td>Call-and-response pair</td>
+                        <td><em>Vou mandar lecô cajueiro / Vou mandar loiá</em></td>
+                        <td><em>Vou mandar cajuê / Vou mandar loiá</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Variant refrain</strong></td>
+                        <td>Same structure, shorter word</td>
+                        <td><em>Vou mandar lecô cajuê</em></td>
+                        <td><em>Vou mandar loiá cajuê</em></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3. Subject omission and pronouns</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Explanation</th>
+                        <th>Example</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Vou (no eu)</strong></td>
+                        <td>Subject pronoun <em>eu</em> is dropped</td>
+                        <td><em>Vou mandar</em> (not <em>eu vou mandar</em>)</td>
+                        <td>Portuguese often omits subject pronouns because verb endings carry the meaning.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>First person singular</strong></td>
+                        <td>Vou = I am going</td>
+                        <td><em>Vou mandar loiá</em></td>
+                        <td>In singing, subject omission is even more common than in speech.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>No other pronouns in song</strong></td>
+                        <td>Song stays in first person throughout</td>
+                        <td>All lines begin with <em>Vou</em></td>
+                        <td>Keeps the chant focused, personal, and easy for the group to follow.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>4. Repeated refrain structure</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Explanation</th>
+                        <th>Example from song</th>
+                        <th>Why it matters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Call and response</strong></td>
+                        <td>One line is answered by the next</td>
+                        <td><em>Vou mandar lecô cajueiro / Vou mandar loiá</em></td>
+                        <td>Central to capoeira singing and group participation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repetition</strong></td>
+                        <td>Same lines return many times</td>
+                        <td><em>Vou mandar lecô cajueiro</em> (repeated 4 times)</td>
+                        <td>Repetition builds memory and keeps rhythm steady.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Formulaic phrase</strong></td>
+                        <td>Short sung units are reused exactly</td>
+                        <td><em>vou mandar</em> + <em>lecô</em> / <em>loiá</em></td>
+                        <td>Song works like a musical pattern more than a spoken sentence.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Variant ending</strong></td>
+                        <td>cajueiro → cajuê in later verses</td>
+                        <td><em>Vou mandar lecô cajuê</em></td>
+                        <td>Shows oral tradition flexibility; short form adds rhythmic energy.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5. Poetic and traditional language</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expression</th>
+                        <th>Literal</th>
+                        <th>Functional</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>lecô</strong></td>
+                        <td>No standard translation</td>
+                        <td>Sung call signal</td>
+                        <td>Traditional capoeira singing term; not found in standard dictionaries.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>loiá</strong></td>
+                        <td>No standard translation</td>
+                        <td>Sung response signal</td>
+                        <td>Traditional refrain; marks the reply in call-and-response.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>cajuê</strong></td>
+                        <td>Cashew (short form)</td>
+                        <td>Rhythmic anchor / refrain</td>
+                        <td>Poetic shortening of cajueiro; common in oral singing tradition.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>mandar (in song)</strong></td>
+                        <td>to send</td>
+                        <td>to launch a chant / to call out</td>
+                        <td><em>Mandar</em> takes a musical meaning here beyond its everyday use.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>6. Grammar questions</h3>
+            <ul style="margin-left: 20px; line-height: 2;">
+                <li>Why does Portuguese say <em>vou mandar</em> instead of <em>mandarei</em> (I will send)?</li>
+                <li>What is the base verb that <em>vou</em> comes from, and what does that verb mean?</li>
+                <li>Why is the subject pronoun <em>eu</em> missing from every line of the song?</li>
+                <li>What does <em>lecô</em> do in the song — is it a verb, a noun, or something else?</li>
+                <li>How does the song show call-and-response through its grammar and structure?</li>
+            </ul>
+        </div>
+
+        <!-- Cultural Context -->
+        <div class="section">
+            <h2>🌍 Cultural Context</h2>
+            <div class="cultural-note">
+                <p>This is a traditional capoeira corrido, so it belongs to the call-and-response side of capoeira singing rather than a solo narrative song.</p>
+                <p>The words <em>cajueiro</em> and <em>caju</em> connect the song to the cashew tree, a familiar image in Brazilian life, food culture, and song tradition.</p>
+                <p>Different communities sing the song with small variations — including the spelling <em>leco</em> vs <em>lecô</em> and <em>loiá</em> vs <em>loiô</em> — which is normal and expected in oral tradition.</p>
+                <p>In capoeira, songs like this help organize the roda, support rhythm, and bring the group into one shared voice. The simplicity of the lyrics makes them easy for everyone to join.</p>
+                <p>The refrain words <em>lecô</em> and <em>loiá</em> are important because they keep the chant moving even when the literal meaning is flexible or debated. Their role is musical, not just linguistic.</p>
+                <p>This song is especially good for beginners because it has very few unique words and a highly predictable structure — once you learn the first two lines, you know most of the song.</p>
+            </div>
+        </div>
+
+        <!-- Repeated Expressions -->
+        <div class="section">
+            <h2>🔁 Repeated Expressions</h2>
+            <div class="refrain-box">
+                <ul>
+                    <li><strong>"Vou mandar lecô cajueiro"</strong> — Main call line; sets the chant and gives the song its name. Sung by the lead singer.</li>
+                    <li><strong>"Vou mandar loiá"</strong> — Main response line; completes the call-and-response pair. Sung by the group.</li>
+                    <li><strong>"Vou mandar lecô cajuê"</strong> — Variant call line; keeps the rhythm while shifting to the shorter refrain word.</li>
+                    <li><strong>"Vou mandar loiá cajuê"</strong> — Matching response variant; reinforces the musical loop with added energy.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Practice -->
+        <div class="section">
+            <div class="practice-box">
+                <h4>✏️ Practice Exercises</h4>
+                <ol>
+                    <li>Write two new sentences using <strong>vou mandar</strong> — try to use a word you already know as the object.</li>
+                    <li>Say the call line slowly and clap on each <strong>vou mandar</strong>.</li>
+                    <li>Circle the words that repeat in the song and explain why they help the roda.</li>
+                    <li>Identify the noun in the song — is it masculine or feminine, and how can you tell?</li>
+                    <li>Sing the full song from memory: call lines first, then response lines.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="index.html" class="btn btn-back">← Back to Home</a>
+            <a href="#" class="btn btn-quiz">Take Quiz →</a>
+        </div>
+    </div>
+</body>
+</html>
